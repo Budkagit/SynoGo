@@ -836,7 +836,7 @@
 // CONFIG — update this with your deployed Apps Script URL
 
 // ======================================================
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxqJOtCzUyh79r6eE8XCb5akQvdi_6V-n92KVhzfxEOe3KEPrDYX92KHitnVXa6fH0J/exec'; // ← REPLACE WITH YOUR DEPLOYED URL
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwNDfLOfiViMRPG0MKse2wLmD2PI81WK7AFp-jr6xJKTntMdf7czx18avhAvuN92l74/exec'; // ← REPLACE WITH YOUR DEPLOYED URL
 const ADMIN_PIN  = '1234';
 
 // ======================================================
@@ -1151,25 +1151,26 @@ function renderReviews() {
 // ======================================================
 // FORM SUBMIT
 // ======================================================
-async function submitForm(formId, btnId, payloadFn, successMsg, resetStar) {
-  const btn = document.getElementById(btnId); if (!btn) return;
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Илгээж байна…';
-  const result = await postToSheets(payloadFn());
-  btn.disabled = false;
-  const labels = {
-    'booking-submit-btn': '<i data-lucide="send" style="width:17px;height:17px"></i><span>Захиалга илгээх</span>',
-    'review-submit-btn':  '<i data-lucide="send" style="width:16px;height:16px"></i><span>Илгээх</span>'
-  };
-  btn.innerHTML = labels[btnId] || 'Илгээх';
-  lucide.createIcons();
-  if (result.ok) {
-    showToast(successMsg);
-    document.getElementById(formId).reset();
-    if (resetStar) { selectedRating = 0; updateStarUI(); }
-    await loadAllData();
-  } else {
-    showToast('Сүлжээний алдаа. Дахин оролдоно уу.', true);
+async function postToSheets(payload) {
+  const scriptURL = 'YOUR_SCRIPT_URL_HERE';
+  
+  try {
+    await fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors', // This is required to bypass the CORS block
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // Since 'no-cors' doesn't let us read the server response,
+    // we assume success if the fetch call itself didn't crash.
+    return { ok: true }; 
+    
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return { ok: false };
   }
 }
 
