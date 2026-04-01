@@ -124,24 +124,25 @@
     .hero-stats { display: flex; margin-top: 48px; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; overflow: hidden; background: white; }
     .hero-stat { flex: 1; padding: 18px 20px; text-align: center; border-right: 1px solid rgba(0,0,0,0.06); }
     .hero-stat:last-child { border-right: none; }
-    .hero-stat-num { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--orange); }
+    .hero-stat-num { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--orange); }
     .hero-stat-label { font-size: 12px; color: var(--gray); margin-top: 2px; font-weight: 500; }
 
     .hero-visual { position: relative; }
     .hero-card-main { background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); position: relative; z-index: 2; }
     .hero-card-float {
-      position: absolute; background: white; border-radius: 16px; padding: 16px 20px;
+      position: absolute; background: white; border-radius: 16px; padding: 14px 18px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;
       font-size: 13px; font-weight: 600; animation: floatCard 4s ease-in-out infinite;
+      max-width: 320px;
     }
     @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-    .uni-chip { display: inline-flex; align-items: center; background: var(--peach); border-radius: 100px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--orange); margin: 4px 4px 4px 0; }
+    .uni-chip { display: inline-flex; align-items: center; background: var(--peach); border-radius: 100px; padding: 5px 10px; font-size: 11px; font-weight: 600; color: var(--orange); margin: 3px 3px 3px 0; }
     .admit-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
     .admit-row:last-child { border: none; padding-bottom: 0; }
-    .admit-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--peach); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .admit-uni { font-size: 13px; font-weight: 700; }
-    .admit-scholarship { font-size: 11px; color: var(--orange); font-weight: 600; white-space: nowrap; }
-    .admit-year { font-size: 11px; color: var(--gray); }
+    .admit-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--peach); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .admit-uni { font-size: 12px; font-weight: 700; }
+    .admit-scholarship { font-size: 10px; color: var(--orange); font-weight: 600; white-space: nowrap; }
+    .admit-year { font-size: 10px; color: var(--gray); }
 
     /* SECTIONS */
     .section { padding: 96px 24px; }
@@ -187,7 +188,7 @@
     .service-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
     .service-desc { font-size: 14px; line-height: 1.7; color: rgba(0,0,0,0.5); }
     .service-card.featured .service-desc { color: rgba(255,255,255,0.75); }
-    .service-price { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: space-between; }
+    .service-price { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .service-card.featured .service-price { border-top-color: rgba(255,255,255,0.2); }
     .price-tag { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--orange); }
     .service-card.featured .price-tag { color: white; }
@@ -226,7 +227,7 @@
     .mentor-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
     .mentor-uni { font-size: 13px; color: var(--orange); font-weight: 600; margin-bottom: 6px; }
     .mentor-major { font-size: 12px; color: var(--gray); margin-bottom: 14px; }
-    .mentor-desc { font-size: 13px; color: rgba(0,0,0,0.55); line-height: 1.6; margin-bottom: 16px; }
+    .mentor-desc { font-size: 13px; color: rgba(0,0,0,0.55); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
     .mentor-tag { display: inline-flex; background: var(--peach); color: var(--orange); border-radius: 100px; padding: 4px 10px; font-size: 11px; font-weight: 600; margin: 2px; }
 
     /* SUCCESS */
@@ -402,39 +403,45 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><div class="hero-stat-num">8+</div><div class="hero-stat-label">Амжилттай оюутан</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">630000rmb+</div><div class="hero-stat-label">Нийт авсан тэтгэлэг</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">630k¥+</div><div class="hero-stat-label">Нийт авсан тэтгэлэг</div></div>
         <div class="hero-stat"><div class="hero-stat-num">95%</div><div class="hero-stat-label">Элсэлтийн амжилт</div></div>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card-float" style="top:-20px;right:-10px;z-index:3;">
-        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;color:var(--orange)"><i data-lucide="award" style="width:18px;height:18px"></i></div>
-        <div><div style="font-size:13px;font-weight:700">申请进度通知(Notification of Application Progress)</div><div style="font-size:11px;color:var(--gray)">Congratulations! You have successfully passed...</div></div>
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;color:var(--orange);flex-shrink:0"><i data-lucide="award" style="width:18px;height:18px"></i></div>
+        <div style="min-width:0"><div style="font-size:12px;font-weight:700">申请进度通知</div><div style="font-size:10px;color:var(--gray)">Congratulations! You have successfully passed...</div></div>
       </div>
       <div class="hero-card-main">
         <div style="font-size:12px;font-weight:700;color:var(--gray);margin-bottom:16px;letter-spacing:0.06em;text-transform:uppercase">Сүүлийн амжилтууд</div>
         <div class="admit-row">
           <div class="admit-avatar">👨‍🎓</div>
-          <div style="flex:1"><div class="admit-uni">Tongji University</div><div class="admit-year">软件工程 · 2026</div></div>
-          <div class="admit-scholarship">Chinese Government Scholarship</div>
+          <div style="flex:1;min-width:0"><div class="admit-uni">Tongji University</div><div class="admit-year">软件工程 · 2026</div></div>
+          <div class="admit-scholarship">CSC Scholarship</div>
         </div>
         <div class="admit-row">
           <div class="admit-avatar">👩‍🎓</div>
-          <div style="flex:1"><div class="admit-uni">Shanghai University of Finance and Economics </div><div class="admit-year">国际贸易与经济 · 2026</div></div>
-          <div class="admit-scholarship">Shanghai Government Scholarship</div>
+          <div style="flex:1;min-width:0"><div class="admit-uni">SUFE Shanghai</div><div class="admit-year">国际贸易与经济 · 2026</div></div>
+          <div class="admit-scholarship">SGS Scholarship</div>
         </div>
         <div class="admit-row">
           <div class="admit-avatar">🧑‍🎓</div>
-          <div style="flex:1"><div class="admit-uni">Zhejiang University of Science and Technology</div><div class="admit-year">国际商务 · 2026</div></div>
-          <div class="admit-scholarship">Zhejiang Provincial Government Scholarship</div>
+          <div style="flex:1;min-width:0"><div class="admit-uni">ZJUST Zhejiang</div><div class="admit-year">国际商务 · 2026</div></div>
+          <div class="admit-scholarship">Zhejiang Gov. Scholarship</div>
         </div>
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.06)">
           <div style="font-size:11px;color:var(--gray);margin-bottom:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Амжилттай элссэн их сургуулиуд</div>
-          <div><span class="uni-chip">🏛 Tsinghua University</span><span class="uni-chip">🎓 Peking unievrsity</span><span class="uni-chip">📚 Shanghai Jiaotong University</span><span class="uni-chip">🌐 Xi'an Jiaotong University</span><span class="uni-chip">⚗️ Harbin Institute of Technology</span></div>
+          <div>
+            <span class="uni-chip">Tsinghua</span>
+            <span class="uni-chip">PKU</span>
+            <span class="uni-chip">SJTU</span>
+            <span class="uni-chip">Xi'an JTU</span>
+            <span class="uni-chip">HIT</span>
+          </div>
         </div>
       </div>
       <div class="hero-card-float" style="bottom:-24px;left:-16px;z-index:3;animation-delay:1.5s">
-        <div style="width:36px;height:36px;border-radius:10px;background:var(--black);display:flex;align-items:center;justify-content:center"><span style="font-size:18px">🌟</span></div>
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--black);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:18px">🌟</span></div>
         <div><div style="font-size:13px;font-weight:700">95% амжилт</div><div style="font-size:11px;color:var(--gray)">Элсэлтийн үр дүн</div></div>
       </div>
     </div>
@@ -453,8 +460,8 @@
         <div style="margin-top:28px">
           <span class="feature-pill"><i data-lucide="globe" style="width:14px;height:14px;color:var(--orange)"></i>Hybrid program</span>
           <span class="feature-pill"><i data-lucide="shield-check" style="width:14px;height:14px;color:var(--orange)"></i>Олон жилийн туршлага</span>
-          <span class="feature-pill"><i data-lucide="users" style="width:14px;height:14px;color:var(--orange)"></i>Ижил хүсэл сонирхол зорилгото</span>
-          <span class="feature-pill"><i data-lucide="trending-up" style="width:14px;height:14px;color:var(--orange)"></i>Үнэн бодит дата өгөгдөлд суурилсан</span>
+          <span class="feature-pill"><i data-lucide="users" style="width:14px;height:14px;color:var(--orange)"></i>Ижил зорилготой нийгэмлэг</span>
+          <span class="feature-pill"><i data-lucide="trending-up" style="width:14px;height:14px;color:var(--orange)"></i>Бодит дата өгөгдөлд суурилсан</span>
         </div>
       </div>
       <div class="about-visual">
@@ -499,7 +506,7 @@
         <div class="service-title">" Mentorship "</div>
         <p class="service-desc">Хятадад аль хэдийн суралцаж буй оюутнуудаас шууд зааварчилгаа авна. Бодит туршлага, бодит зөвлөгөө.</p>
         <div class="service-price">
-          <div><div class="price-tag">₮200,000</div><div class="price-label">Өргөдөл илгээх явцад бүхий л хугацаанд чиглүүлэг зөвлөгөө</div></div>
+          <div><div class="price-tag">₮200,000</div><div class="price-label">Өргөдөл илгээх явцад бүхий л хугацаанд</div></div>
           <a href="#mentors" style="font-size:13px;font-weight:600;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:4px">Менторуудыг үзэх <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
         </div>
       </div>
@@ -513,9 +520,9 @@
         </div>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i data-lucide="heart" style="width:22px;height:22px"></i></div>
+        <div class="service-icon"><i data-lucide="award" style="width:22px;height:22px"></i></div>
         <div class="service-title">" CSC Prep "</div>
-        <p class="service-desc">Засгийн газрийн тэтгэлгийн бэлтгэл.</p>
+        <p class="service-desc">Засгийн газрын тэтгэлэгт зориулсан бэлтгэл. Баримт бичгийн шаардлага, стратеги, дадлага хийх.</p>
         <div class="service-price">
           <div><div class="price-tag">Тусгай</div><div class="price-label">Үнийн санал авах</div></div>
           <a href="#booking" style="font-size:13px;font-weight:600;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:4px">Захиалах <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
@@ -551,8 +558,8 @@
             <li><div class="check-badge">✓</div>Тэтгэлгийн стратеги</li>
             <li><div class="check-badge">✓</div>Зардлын дэлгэрэнгүй тооцоо</li>
             <li><div class="check-badge">✓</div>Шалгалт, шаардлагын тайлбар</li>
-            <li><div class="check-badge">✓</div>Q&A — бүх асуултад хариулах</li>
-            <li><div class="check-badge">✓</div>Бусад</li>
+            <li><div class="check-badge">✓</div>Q&amp;A — бүх асуултад хариулах</li>
+            <li><div class="check-badge">✓</div>Нийгэмлэгт нэвтрэх эрх</li>
           </ul>
           <a href="#booking" class="btn-primary" style="width:100%;justify-content:center">
             <i data-lucide="calendar" style="width:17px;height:17px"></i>Одоо захиалах
@@ -576,8 +583,8 @@
         <div class="mentor-body">
           <div class="mentor-name">Будбаяр</div>
           <div class="mentor-uni">Tongji University</div>
-          <div class="mentor-major">Software Enigneer · 1-р курс</div>
-          <p class="mentor-desc">"CSC тэтгэлгээр Tongji-д элссэн. Элсэлтийн өргөдлийн "know how" ойлгоход тусална."</p>
+          <div class="mentor-major">Software Engineering · 1-р курс</div>
+          <p class="mentor-desc">"CSC тэтгэлгээр Tongji-д элссэн. Элсэлтийн өргөдлийн 'know how' ойлгоход тусална."</p>
           <div><span class="mentor-tag">CSC тэтгэлэг</span><span class="mentor-tag">STEM</span><span class="mentor-tag">Хятад хэл</span></div>
         </div>
       </div>
@@ -586,7 +593,7 @@
         <div class="mentor-body">
           <div class="mentor-name">Дөлгөөн</div>
           <div class="mentor-uni">Shanghai University of Finance and Economics</div>
-          <div class="mentor-major">International Trade and Economic · 1-р курс</div>
+          <div class="mentor-major">International Trade and Economics · 1-р курс</div>
           <p class="mentor-desc">"SGS тэтгэлгээр SUFE-д элссэн. Өргөдлийн практик зөвлөгөө."</p>
           <div><span class="mentor-tag">SGS тэтгэлэг</span><span class="mentor-tag">Бизнес</span><span class="mentor-tag">Шанхай</span></div>
         </div>
@@ -595,10 +602,10 @@
         <div class="mentor-header" style="background:linear-gradient(135deg,#E6C6AC,#FFE1D3)">🚀</div>
         <div class="mentor-body">
           <div class="mentor-name">next?</div>
-          <div class="mentor-uni">next?</div>
-          <div class="mentor-major">next?</div>
-          <p class="mentor-desc">"next?"</p>
-          <div><span class="mentor-tag">next?</span><span class="mentor-tag">next?</span><span class="mentor-tag">next?</span></div>
+          <div class="mentor-uni" style="color:var(--gray)">Таны байр</div>
+          <div class="mentor-major">Хятадад суралцаж байна уу?</div>
+          <p class="mentor-desc">"Туршлагаа хуваалцаж, шинэ оюутнуудад зам зааж, нийгэмлэгийн хэсэг болоорой."</p>
+          <div><span class="mentor-tag">next?</span><span class="mentor-tag">Таныг хүлээж байна</span></div>
         </div>
       </div>
     </div>
@@ -614,12 +621,17 @@
     <div class="section-label">Амжилтын түүхүүд</div>
     <h2 class="section-title">Тэдний <em>амжилт,</em> таны <em>зам.</em></h2>
     <div class="success-grid">
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Түмэнхүслэн</div><div class="success-uni">Sun-Yat Sun University</div><div class="success-year">Бизнес · 2026 он</div><p class="success-quote">"SynoGo-гийн зөвлөгөөгүйгээр -д элсэх ийм амжилттай байхгүй байсан. Бүх шатанд дэмжлэг өгч, тэтгэлэг авахад тусалсан."</p><div class="scholarship-badge">тэтгэлэг</div></div>
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Сарантуяа</div><div class="success-uni">Bejing Institue of Technology</div><div class="success-year">Олон Улсын харилцаа · 2026 он</div><p class="success-quote">"Бие даан хийхээр бодож байсан ч SynoGo-г хэрэглэсний дараа яг зөв их сургуулийг олсон. Хямд зардалтай, тэтгэлэгтэй!"</p><div class="scholarship-badge">тэтгэлэг</div></div>
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Тэмүүлэн</div><div class="success-uni">Shanghai University</div><div class="success-year">Бизнес · 2026 он</div><p class="success-quote">" сургуульд элсэх маш хэцүү байдаг. SynoGo зөв бэлтгэл, зөв стратеги тулгамдсан үед хамт байсан."</p><div class="scholarship-badge">тэтгэлэг</div></div>
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Туяа</div><div class="success-uni">Zhejiang University</div><div class="success-year">Хятад хэл · 2025 он</div><p class="success-quote">"SynoGo шаардлагуудыг тодорхой тайлбарласан. Маш их талархлаа."</p><div class="scholarship-badge">тэтгэлэг</div></div>
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Бямбажаргал</div><div class="success-uni">Tsinghua University</div><div class="success-year">Chemical Enigneer · 2025 он</div><p class="success-quote">"SynoGo-ийн ментор бүх практик зөвлөгөөг өгсөн."</p><div class="scholarship-badge">тэтгэлэг</div></div>
-      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">______</div><div class="success-uni">______</div><div class="success-year">______</div><p class="success-quote">"-д элсэхэд SynoGo-гийн бодит мэдлэг маш чухал байсан."</p><div class="scholarship-badge">тэтгэлэг</div></div>
+      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Түмэнхүслэн</div><div class="success-uni">Sun Yat-sen University</div><div class="success-year">Бизнес · 2026 он</div><p class="success-quote">"SynoGo-гийн зөвлөгөөгүйгээр энэ амжилтанд хүрэх хэцүү байсан. Бүх шатанд дэмжлэг өгч, тэтгэлэг авахад тусалсан."</p><div class="scholarship-badge">🏆 тэтгэлэг</div></div>
+      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Сарантуяа</div><div class="success-uni">Beijing Institute of Technology</div><div class="success-year">Олон Улсын харилцаа · 2026 он</div><p class="success-quote">"Бие даан хийхээр бодож байсан ч SynoGo-г хэрэглэсний дараа яг зөв их сургуулийг олсон. Хямд зардалтай, тэтгэлэгтэй!"</p><div class="scholarship-badge">🎯 тэтгэлэг</div></div>
+      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Тэмүүлэн</div><div class="success-uni">Shanghai University</div><div class="success-year">Бизнес · 2026 он</div><p class="success-quote">"SynoGo зөв бэлтгэл, зөв стратеги тулгамдсан үед хамт байсан. Маш их талархлаа!"</p><div class="scholarship-badge">⭐ тэтгэлэг</div></div>
+      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Туяа</div><div class="success-uni">Zhejiang University</div><div class="success-year">Хятад хэл · 2025 он</div><p class="success-quote">"SynoGo шаардлагуудыг тодорхой тайлбарласан. Маш их талархлаа."</p><div class="scholarship-badge">💰 тэтгэлэг</div></div>
+      <div class="success-card"><div class="success-emoji">🎓</div><div class="success-name">Бямбажаргал</div><div class="success-uni">Tsinghua University</div><div class="success-year">Chemical Engineering · 2025 он</div><p class="success-quote">"SynoGo-ийн ментор бүх практик зөвлөгөөг өгсөн. Энэ алхамаас харамсаагүй."</p><div class="scholarship-badge">💎 CSC тэтгэлэг</div></div>
+      <div class="success-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:220px">
+        <div style="font-size:48px;margin-bottom:16px">🚀</div>
+        <div class="success-name">Дараагийн амжилт</div>
+        <div class="success-uni" style="margin-top:6px">таных байж болно</div>
+        <a href="#booking" class="btn-primary" style="margin-top:20px;padding:12px 24px;font-size:14px"><i data-lucide="arrow-right" style="width:15px;height:15px"></i>Эхлэх</a>
+      </div>
     </div>
   </div>
 </section>
@@ -655,10 +667,10 @@
             <div class="form-group"><label class="form-label">Үйлчилгээ *</label>
               <select id="book-service" required class="form-input">
                 <option value="">Сонгоно уу</option>
-                <option value="consulting">Consulting | Зөвлөгөөний — ₮40,000</option>
+                <option value="consulting">Consulting | Зөвлөгөө — ₮40,000</option>
                 <option value="mentorship">Mentorship | Менторшип — ₮200,000</option>
                 <option value="application">Application Prep | Өргөдлийн бэлтгэл</option>
-                <option value="community">CSC Prep</option>
+                <option value="csc">CSC Prep | Засгийн газрын тэтгэлэг</option>
               </select>
             </div>
           </div>
@@ -728,7 +740,7 @@
       </div>
       <div class="footer-col">
         <h4>Холбогдох</h4>
-        <a href="mailto:info@synogo.mn">synogomongolia@gmail.com</a>
+        <a href="mailto:synogomongolia@gmail.com">synogomongolia@gmail.com</a>
         <a href="tel:+97699000000">+976 9900 0000</a>
         <a>Улаанбаатар, МУ</a>
       </div>
@@ -780,7 +792,7 @@
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div>
           <h2 style="font-family:'Fraunces',serif;font-size:24px;font-weight:700">Админ панель</h2>
-          <div id="sheets-status" style="font-size:12px;color:var(--gray);margin-top:2px">Google Sheets холбоотой</div>
+          <div id="sheets-status" style="font-size:12px;color:var(--gray);margin-top:2px">Ачааллаж байна...</div>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <button id="admin-refresh-btn" onclick="refreshAdminData()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:var(--cream);border:1px solid rgba(0,0,0,0.1);font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i>Refresh</button>
@@ -819,73 +831,192 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════════
+// CONFIG — зөвхөн эндээс өөрчилнө
+// ═══════════════════════════════════════════════
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwtJOZ2Se-6_Tuv4ptaCn6X-UfJweqWcfU1bnha-5uBJzf6uZ4lL9arPPxTHhDeAjZy/exec';
-const ADMIN_PIN = '1234';
+const ADMIN_PIN  = '1234';
 
-let allData=[], currentAdminTab='orders', currentSF='all', selectedRating=0, adminLoggedIn=false, pinEntry='';
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let allData = [], currentAdminTab = 'orders', currentSF = 'all';
+let selectedRating = 0, adminLoggedIn = false, pinEntry = '';
 
-async function fetchFromSheets(){
-  try{
-    const target=encodeURIComponent(SHEETS_URL+'?action=getAll&t='+Date.now());
-    const res=await fetch('https://api.allorigins.win/get?url='+target);
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const wrapper=await res.json();
-    const data=JSON.parse(wrapper.contents);
-    if(!Array.isArray(data)) throw new Error('Буруу өгөгдөл');
-    setSheetsStatus('Холбогдсон ✓ · '+data.length+' бичлэг');
+// ═══════════════════════════════════════════════
+// SHEETS API — allorigins proxy ашигладаг (GET)
+//              no-cors POST (opaque, тиймдээ ok гэж үзнэ)
+// ═══════════════════════════════════════════════
+async function fetchFromSheets() {
+  setSheetsStatus('Ачааллаж байна...');
+  try {
+    const url = 'https://api.allorigins.win/get?url=' +
+                encodeURIComponent(SHEETS_URL + '?action=getAll&t=' + Date.now());
+    const res  = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const wrap = await res.json();
+    const data = JSON.parse(wrap.contents);
+    if (!Array.isArray(data)) throw new Error('Буруу формат');
+    setSheetsStatus('Холбогдсон ✓ · ' + data.length + ' бичлэг');
     return data;
-  }catch(e){ setSheetsStatus('Алдаа: '+e.message); return []; }
+  } catch (e) {
+    setSheetsStatus('Алдаа: ' + e.message);
+    return [];
+  }
 }
-function setSheetsStatus(msg){ const el=document.getElementById('sheets-status'); if(el) el.textContent=msg; }
-async function postToSheets(payload){ try{ await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'create',data:payload})}); return{ok:true}; }catch(e){return{ok:false};} }
-async function patchStatusInSheets(rowId,st){ try{ await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'updateStatus',id:rowId,status:st})}); return{ok:true}; }catch(e){return{ok:false};} }
-async function deleteFromSheets(rowId){ try{ await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'delete',id:rowId})}); return{ok:true}; }catch(e){return{ok:false};} }
-async function loadAllData(){ const data=await fetchFromSheets(); allData=data; renderReviews(); updateStats(); if(adminLoggedIn&&document.getElementById('admin-modal').style.display!=='none') renderAdminContent(); }
 
-function openLoginModal(){ if(adminLoggedIn){openAdminModal();return;} pinEntry=''; updatePinDots(); document.getElementById('login-error').style.display='none'; document.getElementById('login-modal').style.display='block'; lucide.createIcons(); }
-function closeLoginModal(){ document.getElementById('login-modal').style.display='none'; pinEntry=''; updatePinDots(); }
-function closeLoginOnBackdrop(e){ if(e.target===e.currentTarget) closeLoginModal(); }
-function pinPress(d){ if(pinEntry.length>=4) return; pinEntry+=d; updatePinDots(); if(pinEntry.length===4) setTimeout(checkPin,150); }
-function pinBackspace(){ pinEntry=pinEntry.slice(0,-1); updatePinDots(); }
-function updatePinDots(){ for(let i=0;i<4;i++){ const el=document.getElementById('dot-'+i); if(i<pinEntry.length) el.classList.add('filled'); else el.classList.remove('filled'); } }
-function checkPin(){ if(pinEntry===ADMIN_PIN){adminLoggedIn=true;closeLoginModal();openAdminModal();}else{document.getElementById('login-error').style.display='block';const pad=document.getElementById('pin-pad');pad.classList.add('animate-shake');setTimeout(()=>pad.classList.remove('animate-shake'),400);pinEntry='';updatePinDots();} }
-function logoutAdmin(){ adminLoggedIn=false; closeAdminModal(); showToast('Системээс гарлаа.'); }
+function setSheetsStatus(msg) {
+  const el = document.getElementById('sheets-status');
+  if (el) el.textContent = msg;
+}
 
-function openAdminModal(){ document.getElementById('admin-modal').style.display='block'; lucide.createIcons(); refreshAdminData(); }
-function closeAdminModal(){ document.getElementById('admin-modal').style.display='none'; }
-function closeAdminOnBackdrop(e){ if(e.target===e.currentTarget) closeAdminModal(); }
+async function postToSheets(payload) {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'create', data: payload })
+    });
+    return { ok: true };
+  } catch(e) { return { ok: false }; }
+}
 
-async function refreshAdminData(){
-  const btn=document.getElementById('admin-refresh-btn');
-  if(btn){btn.innerHTML='<span class="spinner" style="border-color:rgba(244,76,0,0.2);border-top-color:var(--orange)"></span>';btn.disabled=true;}
+async function patchStatusInSheets(rowId, st) {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'updateStatus', id: rowId, status: st })
+    });
+    return { ok: true };
+  } catch(e) { return { ok: false }; }
+}
+
+async function deleteFromSheets(rowId) {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'delete', id: rowId })
+    });
+    return { ok: true };
+  } catch(e) { return { ok: false }; }
+}
+
+async function loadAllData() {
+  const data = await fetchFromSheets();
+  allData = data;
+  renderReviews();
+  updateStats();
+  if (adminLoggedIn && document.getElementById('admin-modal').style.display !== 'none')
+    renderAdminContent();
+}
+
+// ═══════════════════════════════════════════════
+// PIN LOGIN
+// ═══════════════════════════════════════════════
+function openLoginModal() {
+  if (adminLoggedIn) { openAdminModal(); return; }
+  pinEntry = ''; updatePinDots();
+  document.getElementById('login-error').style.display = 'none';
+  document.getElementById('login-modal').style.display = 'block';
+  lucide.createIcons();
+}
+function closeLoginModal() {
+  document.getElementById('login-modal').style.display = 'none';
+  pinEntry = ''; updatePinDots();
+}
+function closeLoginOnBackdrop(e) { if (e.target === e.currentTarget) closeLoginModal(); }
+function pinPress(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d; updatePinDots();
+  if (pinEntry.length === 4) setTimeout(checkPin, 150);
+}
+function pinBackspace() { pinEntry = pinEntry.slice(0, -1); updatePinDots(); }
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('dot-' + i);
+    if (i < pinEntry.length) el.classList.add('filled');
+    else el.classList.remove('filled');
+  }
+}
+function checkPin() {
+  if (pinEntry === ADMIN_PIN) {
+    adminLoggedIn = true; closeLoginModal(); openAdminModal();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    const pad = document.getElementById('pin-pad');
+    pad.classList.add('animate-shake');
+    setTimeout(() => pad.classList.remove('animate-shake'), 400);
+    pinEntry = ''; updatePinDots();
+  }
+}
+function logoutAdmin() { adminLoggedIn = false; closeAdminModal(); showToast('Системээс гарлаа.'); }
+
+// ═══════════════════════════════════════════════
+// ADMIN PANEL
+// ═══════════════════════════════════════════════
+function openAdminModal() {
+  document.getElementById('admin-modal').style.display = 'block';
+  lucide.createIcons();
+  refreshAdminData();
+}
+function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
+function closeAdminOnBackdrop(e) { if (e.target === e.currentTarget) closeAdminModal(); }
+
+async function refreshAdminData() {
+  const btn = document.getElementById('admin-refresh-btn');
+  if (btn) {
+    btn.innerHTML = '<span class="spinner" style="border-color:rgba(244,76,0,0.2);border-top-color:var(--orange)"></span>';
+    btn.disabled = true;
+  }
   await loadAllData();
-  if(btn){btn.innerHTML='<i data-lucide="refresh-cw" style="width:13px;height:13px"></i>Refresh';btn.disabled=false;lucide.createIcons();}
+  if (btn) {
+    btn.innerHTML = '<i data-lucide="refresh-cw" style="width:13px;height:13px"></i>Refresh';
+    btn.disabled = false;
+    lucide.createIcons();
+  }
   showToast('Шинэчлэгдлээ ✓');
 }
 
-function switchAdminTab(t){ currentAdminTab=t; document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('active',b.dataset.adminTab===t)); document.getElementById('admin-search').value=''; renderAdminContent(); }
-function setSF(s){ currentSF=s; document.querySelectorAll('.sf-btn').forEach(b=>b.classList.toggle('active',b.dataset.sf===s)); renderAdminContent(); }
-function updateStats(){ const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=allData.filter(d=>d.type===t).length;}; s('sc-orders','booking');s('sc-members','membership');s('sc-contacts','contact');s('sc-reviews','review'); }
+function switchAdminTab(t) {
+  currentAdminTab = t;
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.toggle('active', b.dataset.adminTab === t));
+  document.getElementById('admin-search').value = '';
+  renderAdminContent();
+}
+function setSF(s) {
+  currentSF = s;
+  document.querySelectorAll('.sf-btn').forEach(b => b.classList.toggle('active', b.dataset.sf === s));
+  renderAdminContent();
+}
+function updateStats() {
+  const s = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = allData.filter(d => d.type === t).length; };
+  s('sc-orders','booking'); s('sc-members','membership'); s('sc-contacts','contact'); s('sc-reviews','review');
+}
 
-function renderAdminContent(){
-  const c=document.getElementById('admin-content'); if(!c) return;
-  const tmap={orders:'booking',members:'membership',contacts:'contact',reviews:'review'};
-  const q=(document.getElementById('admin-search')?.value||'').toLowerCase();
-  let items=allData.filter(d=>d.type===tmap[currentAdminTab]);
-  if(currentSF!=='all') items=items.filter(d=>(d.status||'pending')===currentSF);
-  if(q) items=items.filter(d=>[d.name,d.email,d.message,d.service].some(v=>(v||'').toLowerCase().includes(q)));
-  items=[...items].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
-  if(!items.length){c.innerHTML='<p style="text-align:center;padding:40px;color:var(--gray);font-style:italic">Тохирох өгөгдөл байхгүй.</p>';return;}
-  c.innerHTML=items.map(item=>{
-    const st=item.status||'pending';
-    const bc=st==='approved'?'badge-approved':st==='rejected'?'badge-rejected':'badge-pending';
-    const sl=st==='approved'?'Баталгаажсан':st==='rejected'?'Татгалзсан':'Хүлээгдэж буй';
-    let sum='';
-    if(item.type==='booking') sum=`<span style="color:var(--orange)">${item.service||''}</span> · ${item.date||''}`;
-    if(item.type==='contact') sum=(item.message||'').substring(0,70)+((item.message?.length||0)>70?'…':'');
-    if(item.type==='review') sum='★'.repeat(item.rating||0)+' · '+(item.review_text||'').substring(0,55);
-    if(item.type==='membership') sum=`${item.nationality||''} · ${item.purpose||''}`;
-    return`<div class="admin-row" data-admin-id="${item.id}">
+function renderAdminContent() {
+  const c = document.getElementById('admin-content'); if (!c) return;
+  const tmap = { orders:'booking', members:'membership', contacts:'contact', reviews:'review' };
+  const q = (document.getElementById('admin-search')?.value || '').toLowerCase();
+  let items = allData.filter(d => d.type === tmap[currentAdminTab]);
+  if (currentSF !== 'all') items = items.filter(d => (d.status || 'pending') === currentSF);
+  if (q) items = items.filter(d => [d.name,d.email,d.message,d.service].some(v => (v||'').toLowerCase().includes(q)));
+  items = [...items].sort((a,b) => new Date(b.created_at||0) - new Date(a.created_at||0));
+  if (!items.length) {
+    c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--gray);font-style:italic">Тохирох өгөгдөл байхгүй.</p>';
+    return;
+  }
+  c.innerHTML = items.map(item => {
+    const st = item.status || 'pending';
+    const bc = st==='approved' ? 'badge-approved' : st==='rejected' ? 'badge-rejected' : 'badge-pending';
+    const sl = st==='approved' ? 'Баталгаажсан' : st==='rejected' ? 'Татгалзсан' : 'Хүлээгдэж буй';
+    let sum = '';
+    if (item.type==='booking')    sum = `<span style="color:var(--orange)">${item.service||''}</span> · ${item.date||''}`;
+    if (item.type==='contact')    sum = (item.message||'').substring(0,70) + ((item.message?.length||0)>70?'…':'');
+    if (item.type==='review')     sum = '★'.repeat(item.rating||0) + ' · ' + (item.review_text||'').substring(0,55);
+    if (item.type==='membership') sum = `${item.nationality||''} · ${item.purpose||''}`;
+    return `<div class="admin-row" data-admin-id="${item.id}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
         <div style="flex:1;min-width:0;cursor:pointer" onclick="toggleDetail('${item.id}')">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
@@ -897,8 +1028,8 @@ function renderAdminContent(){
           <p style="font-size:12px;color:rgba(0,0,0,0.4);margin-top:2px">${sum}</p>
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0">
-          ${st!=='approved'?`<button onclick="adminUpdateStatus('${item.id}','approved')" style="width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,0.1);color:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="check" style="width:13px;height:13px"></i></button>`:''}
-          ${st!=='rejected'?`<button onclick="adminUpdateStatus('${item.id}','rejected')" style="width:32px;height:32px;border-radius:8px;background:rgba(220,38,38,0.06);color:#dc2626;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="x" style="width:13px;height:13px"></i></button>`:''}
+          ${st!=='approved' ? `<button onclick="adminUpdateStatus('${item.id}','approved')" style="width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,0.1);color:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="check" style="width:13px;height:13px"></i></button>` : ''}
+          ${st!=='rejected' ? `<button onclick="adminUpdateStatus('${item.id}','rejected')" style="width:32px;height:32px;border-radius:8px;background:rgba(220,38,38,0.06);color:#dc2626;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="x" style="width:13px;height:13px"></i></button>` : ''}
           <button onclick="confirmDelete('${item.id}')" style="width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,0.04);color:var(--gray);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>
         </div>
       </div>
@@ -910,90 +1041,196 @@ function renderAdminContent(){
   lucide.createIcons();
 }
 
-function toggleDetail(id){ const el=document.getElementById('d-'+id); if(el) el.style.display=el.style.display==='none'?'block':'none'; }
-async function adminUpdateStatus(id,st){ const item=allData.find(d=>d.id===id); if(!item)return; item.status=st; renderAdminContent(); updateStats(); showToast(st==='approved'?'Баталгаажлаа ✓':'Татгалзлаа'); await patchStatusInSheets(id,st); }
-function confirmDelete(id){ const card=document.querySelector(`[data-admin-id="${id}"]`); if(!card)return; const o=document.createElement('div'); o.className='confirm-overlay'; o.innerHTML=`<span style="font-size:14px;font-weight:600">Устгах уу?</span><button onclick="doDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--orange);color:white;font-size:13px;font-weight:700;border:none;cursor:pointer">Тийм</button><button onclick="cancelDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--cream);color:var(--black);font-size:13px;border:1px solid rgba(0,0,0,0.1);cursor:pointer">Үгүй</button>`; card.appendChild(o); }
-function cancelDelete(id){ const c=document.querySelector(`[data-admin-id="${id}"]`); if(c){const o=c.querySelector('.confirm-overlay');if(o)o.remove();} }
-async function doDelete(id){ allData=allData.filter(d=>d.id!==id); renderAdminContent(); updateStats(); renderReviews(); showToast('Устгагдлаа.'); await deleteFromSheets(id); }
+function toggleDetail(id) {
+  const el = document.getElementById('d-' + id);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+async function adminUpdateStatus(id, st) {
+  const item = allData.find(d => d.id === id); if (!item) return;
+  item.status = st; renderAdminContent(); updateStats();
+  showToast(st === 'approved' ? 'Баталгаажлаа ✓' : 'Татгалзлаа');
+  await patchStatusInSheets(id, st);
+}
+function confirmDelete(id) {
+  const card = document.querySelector(`[data-admin-id="${id}"]`); if (!card) return;
+  const o = document.createElement('div');
+  o.className = 'confirm-overlay';
+  o.innerHTML = `<span style="font-size:14px;font-weight:600">Устгах уу?</span>
+    <button onclick="doDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--orange);color:white;font-size:13px;font-weight:700;border:none;cursor:pointer">Тийм</button>
+    <button onclick="cancelDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--cream);color:var(--black);font-size:13px;border:1px solid rgba(0,0,0,0.1);cursor:pointer">Үгүй</button>`;
+  card.appendChild(o);
+}
+function cancelDelete(id) {
+  const c = document.querySelector(`[data-admin-id="${id}"]`);
+  if (c) { const o = c.querySelector('.confirm-overlay'); if (o) o.remove(); }
+}
+async function doDelete(id) {
+  allData = allData.filter(d => d.id !== id);
+  renderAdminContent(); updateStats(); renderReviews();
+  showToast('Устгагдлаа.');
+  await deleteFromSheets(id);
+}
 
-function exportToExcel(){
-  if(typeof XLSX==='undefined'){showToast('SheetJS ачаалагдаагүй.',true);return;}
-  const wb=XLSX.utils.book_new();
-  [{type:'booking',name:'Захиалга',cols:['name','email','phone','service','date','message','status','submitted_at']},
-   {type:'contact',name:'Мессежүүд',cols:['name','email','message','status','submitted_at']},
-   {type:'review',name:'Үнэлгээ',cols:['name','rating','review_text','status','submitted_at']},
-   {type:'membership',name:'Гишүүд',cols:['name','email','phone','nationality','purpose','message','status','submitted_at']}
-  ].forEach(({type,name,cols})=>{
-    const rows=allData.filter(d=>d.type===type); if(!rows.length)return;
-    const ws=XLSX.utils.aoa_to_sheet([cols,...rows.map(r=>cols.map(c=>r[c]??''))]);
-    XLSX.utils.book_append_sheet(wb,ws,name);
+// ═══════════════════════════════════════════════
+// EXCEL EXPORT
+// ═══════════════════════════════════════════════
+function exportToExcel() {
+  if (typeof XLSX === 'undefined') { showToast('SheetJS ачаалагдаагүй.', true); return; }
+  const wb = XLSX.utils.book_new();
+  [
+    { type:'booking',    name:'Захиалга',  cols:['name','email','phone','service','date','message','status','submitted_at'] },
+    { type:'contact',    name:'Мессежүүд', cols:['name','email','message','status','submitted_at'] },
+    { type:'review',     name:'Үнэлгээ',   cols:['name','rating','review_text','status','submitted_at'] },
+    { type:'membership', name:'Гишүүд',    cols:['name','email','phone','nationality','purpose','message','status','submitted_at'] }
+  ].forEach(({ type, name, cols }) => {
+    const rows = allData.filter(d => d.type === type); if (!rows.length) return;
+    const ws = XLSX.utils.aoa_to_sheet([cols, ...rows.map(r => cols.map(c => r[c] ?? ''))]);
+    XLSX.utils.book_append_sheet(wb, ws, name);
   });
-  XLSX.writeFile(wb,`synogo-${new Date().toISOString().slice(0,10)}.xlsx`);
+  XLSX.writeFile(wb, `synogo-${new Date().toISOString().slice(0,10)}.xlsx`);
   showToast('Excel файл татагдлаа!');
 }
 
-function renderReviews(){
-  const list=document.getElementById('reviews-list'); if(!list) return;
-  const reviews=allData.filter(d=>d.type==='review'&&d.status==='approved');
-  if(!reviews.length){list.innerHTML='<p style="text-align:center;grid-column:1/-1;padding:40px;color:var(--gray);font-style:italic">Одоогоор үнэлгээ байхгүй. Та эхлэн үлдээгээрэй!</p>';return;}
-  list.innerHTML=reviews.map(r=>`<div class="review-card"><div class="review-stars">${'★'.repeat(r.rating||0)}<span style="color:#e5e7eb">${'★'.repeat(5-(r.rating||0))}</span></div><p class="review-text">${r.review_text||''}</p><div class="review-author">${r.name}</div><div class="review-sub">${r.submitted_at||''}</div></div>`).join('');
+// ═══════════════════════════════════════════════
+// REVIEWS
+// ═══════════════════════════════════════════════
+function renderReviews() {
+  const list = document.getElementById('reviews-list'); if (!list) return;
+  const reviews = allData.filter(d => d.type === 'review' && d.status === 'approved');
+  if (!reviews.length) {
+    list.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:40px;color:var(--gray);font-style:italic">Одоогоор үнэлгээ байхгүй. Та эхлэн үлдээгээрэй!</p>';
+    return;
+  }
+  list.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-stars">${'★'.repeat(r.rating||0)}<span style="color:#e5e7eb">${'★'.repeat(5-(r.rating||0))}</span></div>
+      <p class="review-text">${r.review_text||''}</p>
+      <div class="review-author">${r.name}</div>
+      <div class="review-sub">${r.submitted_at||''}</div>
+    </div>`).join('');
 }
 
-async function submitForm(formId,btnId,payloadFn,successMsg,resetStar){
-  const btn=document.getElementById(btnId); if(!btn)return;
-  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Илгээж байна…';
-  const result=await postToSheets(payloadFn());
-  btn.disabled=false;
-  const labels={'booking-submit-btn':'<i data-lucide="send" style="width:17px;height:17px"></i><span>Захиалга илгээх</span>','review-submit-btn':'<i data-lucide="send" style="width:16px;height:16px"></i><span>Илгээх</span>'};
-  btn.innerHTML=labels[btnId]||'Илгээх'; lucide.createIcons();
-  if(result.ok){showToast(successMsg);document.getElementById(formId).reset();if(resetStar){selectedRating=0;updateStarUI();}await loadAllData();}
-  else showToast('Сүлжээний алдаа. Дахин оролдоно уу.',true);
+// ═══════════════════════════════════════════════
+// FORM SUBMIT
+// ═══════════════════════════════════════════════
+async function submitForm(formId, btnId, payloadFn, successMsg, resetStar) {
+  const btn = document.getElementById(btnId); if (!btn) return;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Илгээж байна…';
+  const result = await postToSheets(payloadFn());
+  btn.disabled = false;
+  const labels = {
+    'booking-submit-btn': '<i data-lucide="send" style="width:17px;height:17px"></i><span>Захиалга илгээх</span>',
+    'review-submit-btn':  '<i data-lucide="send" style="width:16px;height:16px"></i><span>Илгээх</span>'
+  };
+  btn.innerHTML = labels[btnId] || 'Илгээх';
+  lucide.createIcons();
+  if (result.ok) {
+    showToast(successMsg);
+    document.getElementById(formId).reset();
+    if (resetStar) { selectedRating = 0; updateStarUI(); }
+    await loadAllData();
+  } else {
+    showToast('Сүлжээний алдаа. Дахин оролдоно уу.', true);
+  }
 }
 
-document.getElementById('booking-form').addEventListener('submit',e=>{
+document.getElementById('booking-form').addEventListener('submit', e => {
   e.preventDefault();
-  submitForm('booking-form','booking-submit-btn',()=>({type:'booking',name:document.getElementById('book-name').value,email:document.getElementById('book-email').value,phone:document.getElementById('book-phone').value,service:document.getElementById('book-service').value,date:document.getElementById('book-date').value,message:document.getElementById('book-message').value,status:'pending',rating:0,review_text:'',nationality:'',purpose:'',submitted_at:new Date().toLocaleString('mn-MN'),created_at:new Date().toISOString()}),'Захиалга амжилттай илгээгдлээ! 24 цагт холбогдоно. 🎓',false);
+  submitForm('booking-form', 'booking-submit-btn', () => ({
+    type: 'booking',
+    name:    document.getElementById('book-name').value,
+    email:   document.getElementById('book-email').value,
+    phone:   document.getElementById('book-phone').value,
+    service: document.getElementById('book-service').value,
+    date:    document.getElementById('book-date').value,
+    message: document.getElementById('book-message').value,
+    status: 'pending', rating: 0, review_text: '', nationality: '', purpose: '',
+    submitted_at: new Date().toLocaleString('mn-MN'),
+    created_at:   new Date().toISOString()
+  }), 'Захиалга амжилттай илгээгдлээ! 12 цагт холбогдоно. 🎓', false);
 });
-document.getElementById('review-form').addEventListener('submit',e=>{
+
+document.getElementById('review-form').addEventListener('submit', e => {
   e.preventDefault();
-  if(!selectedRating){showToast('Үнэлгээгээ сонгоно уу.',true);return;}
-  submitForm('review-form','review-submit-btn',()=>({type:'review',name:document.getElementById('review-name').value,rating:selectedRating,review_text:document.getElementById('review-text').value,status:'approved',email:'',phone:'',message:'',service:'',date:'',nationality:'',purpose:'',submitted_at:new Date().toLocaleString('mn-MN'),created_at:new Date().toISOString()}),'Үнэлгээ тавьсанд баярлалаа! ⭐',true);
+  if (!selectedRating) { showToast('Үнэлгээгээ сонгоно уу.', true); return; }
+  submitForm('review-form', 'review-submit-btn', () => ({
+    type: 'review',
+    name:        document.getElementById('review-name').value,
+    rating:      selectedRating,
+    review_text: document.getElementById('review-text').value,
+    status: 'approved', email: '', phone: '', message: '', service: '', date: '',
+    nationality: '', purpose: '',
+    submitted_at: new Date().toLocaleString('mn-MN'),
+    created_at:   new Date().toISOString()
+  }), 'Үнэлгээ тавьсанд баярлалаа! ⭐', true);
 });
 
-document.querySelectorAll('.star-btn').forEach(b=>b.addEventListener('click',()=>{ selectedRating=parseInt(b.dataset.star); updateStarUI(); }));
-function updateStarUI(){ document.querySelectorAll('.star-btn').forEach(b=>{ b.classList.toggle('active',parseInt(b.dataset.star)<=selectedRating); }); }
-
-function showToast(msg,isError=false){
-  const c=document.getElementById('toast-container');
-  const t=document.createElement('div'); t.className='toast'+(isError?' error':''); t.textContent=msg; c.appendChild(t);
-  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity 0.4s';setTimeout(()=>t.remove(),400);},3500);
+document.querySelectorAll('.star-btn').forEach(b => b.addEventListener('click', () => {
+  selectedRating = parseInt(b.dataset.star); updateStarUI();
+}));
+function updateStarUI() {
+  document.querySelectorAll('.star-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.star) <= selectedRating);
+  });
 }
 
-function toggleMobileMenu(){ const m=document.getElementById('mobile-menu'); m.style.display=m.style.display==='none'||!m.style.display?'block':'none'; }
-function closeMobileMenu(){ document.getElementById('mobile-menu').style.display='none'; }
-
-function handleScroll(){
-  const nav=document.getElementById('main-nav');
-  if(window.scrollY>40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-  document.querySelectorAll('.reveal').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight*0.88) el.classList.add('visible'); });
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg, isError = false) {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.textContent = msg; c.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.4s'; setTimeout(() => t.remove(), 400); }, 3500);
 }
 
-function checkMobile(){
-  const btn=document.getElementById('menu-btn');
-  const links=document.querySelector('.nav-links');
-  if(window.innerWidth<=900){ btn.style.display='block'; if(links) links.style.display='none'; }
-  else{ btn.style.display='none'; document.getElementById('mobile-menu').style.display='none'; if(links) links.style.display='flex'; }
+// ═══════════════════════════════════════════════
+// NAV / SCROLL
+// ═══════════════════════════════════════════════
+function toggleMobileMenu() {
+  const m = document.getElementById('mobile-menu');
+  m.style.display = (m.style.display === 'none' || !m.style.display) ? 'block' : 'none';
+}
+function closeMobileMenu() { document.getElementById('mobile-menu').style.display = 'none'; }
+
+function handleScroll() {
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  lucide.createIcons(); handleScroll(); checkMobile(); loadAllData();
-  window.addEventListener('scroll',handleScroll);
-  window.addEventListener('resize',checkMobile);
-  document.addEventListener('keydown',e=>{
-    if(document.getElementById('login-modal').style.display!=='none'){
-      if(/^[0-9]$/.test(e.key)) pinPress(e.key);
-      if(e.key==='Backspace') pinBackspace();
-      if(e.key==='Escape') closeLoginModal();
+function checkMobile() {
+  const btn   = document.getElementById('menu-btn');
+  const links = document.querySelector('.nav-links');
+  if (window.innerWidth <= 900) {
+    btn.style.display = 'block';
+    if (links) links.style.display = 'none';
+  } else {
+    btn.style.display = 'none';
+    document.getElementById('mobile-menu').style.display = 'none';
+    if (links) links.style.display = 'flex';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+  handleScroll();
+  checkMobile();
+  loadAllData();
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', checkMobile);
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('login-modal').style.display !== 'none') {
+      if (/^[0-9]$/.test(e.key)) pinPress(e.key);
+      if (e.key === 'Backspace')  pinBackspace();
+      if (e.key === 'Escape')     closeLoginModal();
     }
   });
 });
