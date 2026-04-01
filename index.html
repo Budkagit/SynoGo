@@ -11,6 +11,7 @@
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 
   <style>
+    /* (keep all your existing styles – no changes needed) */
     :root {
       --cream:    #F4F5E6;
       --orange:   #F44C00;
@@ -831,35 +832,50 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// CONFIG — зөвхөн эндээс өөрчилнө
-// ═══════════════════════════════════════════════
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwtJOZ2Se-6_Tuv4ptaCn6X-UfJweqWcfU1bnha-5uBJzf6uZ4lL9arPPxTHhDeAjZy/exec';
+// ======================================================
+// CONFIG — update this with your deployed Apps Script URL
+// ======================================================
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwtJOZ2Se-6_Tuv4ptaCn6X-UfJweqWcfU1bnha-5uBJzf6uZ4lL9arPPxTHhDeAjZy/exec'; // ← REPLACE WITH YOUR DEPLOYED URL
 const ADMIN_PIN  = '1234';
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // STATE
-// ═══════════════════════════════════════════════
+// ======================================================
 let allData = [], currentAdminTab = 'orders', currentSF = 'all';
 let selectedRating = 0, adminLoggedIn = false, pinEntry = '';
+let adminModalVisible = false;
 
-// ═══════════════════════════════════════════════
-// SHEETS API — allorigins proxy ашигладаг (GET)
-//              no-cors POST (opaque, тиймдээ ok гэж үзнэ)
-// ═══════════════════════════════════════════════
+// ======================================================
+// HELPER: Show toast message
+// ======================================================
+function showToast(msg, isError = false) {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transition = 'opacity 0.4s';
+    setTimeout(() => t.remove(), 400);
+  }, 3500);
+}
+
+// ======================================================
+// SHEETS API – direct fetch (CORS handled by Apps Script)
+// ======================================================
 async function fetchFromSheets() {
   setSheetsStatus('Ачааллаж байна...');
   try {
-    const url = 'https://api.allorigins.win/get?url=' +
-                encodeURIComponent(SHEETS_URL + '?action=getAll&t=' + Date.now());
-    const res  = await fetch(url, { cache: 'no-store' });
+    const url = SHEETS_URL + '?action=getAll&t=' + Date.now();
+    const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const wrap = await res.json();
-    const data = JSON.parse(wrap.contents);
+    const data = await res.json();
     if (!Array.isArray(data)) throw new Error('Буруу формат');
     setSheetsStatus('Холбогдсон ✓ · ' + data.length + ' бичлэг');
     return data;
   } catch (e) {
+    console.error(e);
     setSheetsStatus('Алдаа: ' + e.message);
     return [];
   }
@@ -872,35 +888,45 @@ function setSheetsStatus(msg) {
 
 async function postToSheets(payload) {
   try {
-    await fetch(SHEETS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+    const res = await fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'create', data: payload })
     });
-    return { ok: true };
-  } catch(e) { return { ok: false }; }
+    const result = await res.json();
+    return { ok: result.ok };
+  } catch(e) {
+    console.error(e);
+    return { ok: false };
+  }
 }
 
 async function patchStatusInSheets(rowId, st) {
   try {
-    await fetch(SHEETS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+    const res = await fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'updateStatus', id: rowId, status: st })
     });
-    return { ok: true };
-  } catch(e) { return { ok: false }; }
+    const result = await res.json();
+    return { ok: result.ok };
+  } catch(e) {
+    return { ok: false };
+  }
 }
 
 async function deleteFromSheets(rowId) {
   try {
-    await fetch(SHEETS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+    const res = await fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'delete', id: rowId })
     });
-    return { ok: true };
-  } catch(e) { return { ok: false }; }
+    const result = await res.json();
+    return { ok: result.ok };
+  } catch(e) {
+    return { ok: false };
+  }
 }
 
 async function loadAllData() {
@@ -908,13 +934,12 @@ async function loadAllData() {
   allData = data;
   renderReviews();
   updateStats();
-  if (adminLoggedIn && document.getElementById('admin-modal').style.display !== 'none')
-    renderAdminContent();
+  if (adminLoggedIn && adminModalVisible) renderAdminContent();
 }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // PIN LOGIN
-// ═══════════════════════════════════════════════
+// ======================================================
 function openLoginModal() {
   if (adminLoggedIn) { openAdminModal(); return; }
   pinEntry = ''; updatePinDots();
@@ -953,15 +978,16 @@ function checkPin() {
 }
 function logoutAdmin() { adminLoggedIn = false; closeAdminModal(); showToast('Системээс гарлаа.'); }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // ADMIN PANEL
-// ═══════════════════════════════════════════════
+// ======================================================
 function openAdminModal() {
+  adminModalVisible = true;
   document.getElementById('admin-modal').style.display = 'block';
   lucide.createIcons();
   refreshAdminData();
 }
-function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
+function closeAdminModal() { adminModalVisible = false; document.getElementById('admin-modal').style.display = 'none'; }
 function closeAdminOnBackdrop(e) { if (e.target === e.currentTarget) closeAdminModal(); }
 
 async function refreshAdminData() {
@@ -1071,9 +1097,9 @@ async function doDelete(id) {
   await deleteFromSheets(id);
 }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // EXCEL EXPORT
-// ═══════════════════════════════════════════════
+// ======================================================
 function exportToExcel() {
   if (typeof XLSX === 'undefined') { showToast('SheetJS ачаалагдаагүй.', true); return; }
   const wb = XLSX.utils.book_new();
@@ -1091,9 +1117,9 @@ function exportToExcel() {
   showToast('Excel файл татагдлаа!');
 }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // REVIEWS
-// ═══════════════════════════════════════════════
+// ======================================================
 function renderReviews() {
   const list = document.getElementById('reviews-list'); if (!list) return;
   const reviews = allData.filter(d => d.type === 'review' && d.status === 'approved');
@@ -1110,9 +1136,9 @@ function renderReviews() {
     </div>`).join('');
 }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // FORM SUBMIT
-// ═══════════════════════════════════════════════
+// ======================================================
 async function submitForm(formId, btnId, payloadFn, successMsg, resetStar) {
   const btn = document.getElementById(btnId); if (!btn) return;
   btn.disabled = true;
@@ -1175,20 +1201,9 @@ function updateStarUI() {
   });
 }
 
-// ═══════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════
-function showToast(msg, isError = false) {
-  const c = document.getElementById('toast-container');
-  const t = document.createElement('div');
-  t.className = 'toast' + (isError ? ' error' : '');
-  t.textContent = msg; c.appendChild(t);
-  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.4s'; setTimeout(() => t.remove(), 400); }, 3500);
-}
-
-// ═══════════════════════════════════════════════
-// NAV / SCROLL
-// ═══════════════════════════════════════════════
+// ======================================================
+// NAV / SCROLL / MOBILE
+// ======================================================
 function toggleMobileMenu() {
   const m = document.getElementById('mobile-menu');
   m.style.display = (m.style.display === 'none' || !m.style.display) ? 'block' : 'none';
@@ -1216,9 +1231,9 @@ function checkMobile() {
   }
 }
 
-// ═══════════════════════════════════════════════
+// ======================================================
 // INIT
-// ═══════════════════════════════════════════════
+// ======================================================
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
   handleScroll();
