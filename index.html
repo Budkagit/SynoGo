@@ -888,7 +888,7 @@ function setSheetsStatus(msg) {
 }
 
 async function postToSheets(action, data) {
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxnjQmuNrF8817IZdGFhi53G-Yxo-qZClPceC3jLp1Y6PoZhypVbmlEhEqcsSjl47Fd/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxqJOtCzUyh79r6eE8XCb5akQvdi_6V-n92KVhzfxEOe3KEPrDYX92KHitnVXa6fH0J/exec';
   
   const payload = {
     action: action,
@@ -1151,66 +1151,30 @@ function renderReviews() {
 // ======================================================
 // FORM SUBMIT
 // ======================================================
-// --- 1. CORE COMMUNICATION ---
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnjQmuNrF8817IZdGFhi53G-Yxo-qZClPceC3jLp1Y6PoZhypVbmlEhEqcsSjl47Fd/exec';
-
-async function postToSheets(action, data, id = null) {
+async function postToSheets(payload) {
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxnjQmuNrF8817IZdGFhi53G-Yxo-qZClPceC3jLp1Y6PoZhypVbmlEhEqcsSjl47Fd/exec';
+  
   try {
-    const payload = { action, data, id };
-    const isCreate = (action === 'create');
-
-    // 'no-cors' for creation, 'cors' for admin actions
-    const response = await fetch(SCRIPT_URL, {
+    await fetch(scriptURL, {
       method: 'POST',
-      mode: isCreate ? 'no-cors' : 'cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      mode: 'no-cors', // This is required to bypass the CORS block
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
       body: JSON.stringify(payload)
     });
 
-    if (isCreate) return { ok: true }; // Assume success for no-cors
-    return await response.json();
+    // Since 'no-cors' doesn't let us read the server response,
+    // we assume success if the fetch call itself didn't crash.
+    return { ok: true }; 
+    
   } catch (error) {
-    console.error('API Error:', error);
+    console.error('Fetch error:', error);
     return { ok: false };
   }
 }
 
-// --- 2. GLOBAL SUBMIT HANDLER ---
-window.submitForm = async function(formId, btnId, payloadFn, successMsg, resetStar) {
-  const btn = document.getElementById(btnId);
-  if (!btn) return;
-
-  btn.disabled = true;
-  const originalHTML = btn.innerHTML;
-  btn.innerHTML = '<span class="spinner"></span> Илгээж байна…';
-
-  const result = await postToSheets('create', payloadFn());
-
-  btn.disabled = false;
-  btn.innerHTML = originalHTML;
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-
-  if (result.ok) {
-    showToast(successMsg);
-    document.getElementById(formId).reset();
-    if (resetStar) { selectedRating = 0; updateStarUI(); }
-    if (typeof loadAllData === 'function') await loadAllData();
-  } else {
-    showToast('Сүлжээний алдаа. Дахин оролдоно уу.', true);
-  }
-};
-
-// --- 3. ADMIN SYNC ---
-async function patchStatusInSheets(id, st) {
-  await postToSheets('updateStatus', { status: st }, id);
-}
-
-async function deleteFromSheets(id) {
-  await postToSheets('delete', {}, id);
-}
-
-// --- 4. EVENT LISTENERS ---
-document.getElementById('booking-form')?.addEventListener('submit', e => {
+document.getElementById('booking-form').addEventListener('submit', e => {
   e.preventDefault();
   submitForm('booking-form', 'booking-submit-btn', () => ({
     type: 'booking',
@@ -1220,20 +1184,83 @@ document.getElementById('booking-form')?.addEventListener('submit', e => {
     service: document.getElementById('book-service').value,
     date:    document.getElementById('book-date').value,
     message: document.getElementById('book-message').value,
-    status: 'pending'
-  }), 'Захиалга амжилттай! 🎓', false);
+    status: 'pending', rating: 0, review_text: '', nationality: '', purpose: '',
+    submitted_at: new Date().toLocaleString('mn-MN'),
+    created_at:   new Date().toISOString()
+  }), 'Захиалга амжилттай илгээгдлээ! 12 цагт холбогдоно. 🎓', false);
 });
 
-document.getElementById('review-form')?.addEventListener('submit', e => {
+document.getElementById('review-form').addEventListener('submit', e => {
   e.preventDefault();
   if (!selectedRating) { showToast('Үнэлгээгээ сонгоно уу.', true); return; }
   submitForm('review-form', 'review-submit-btn', () => ({
     type: 'review',
-    name: document.getElementById('review-name').value,
-    rating: selectedRating,
+    name:        document.getElementById('review-name').value,
+    rating:      selectedRating,
     review_text: document.getElementById('review-text').value,
-    status: 'approved'
-  }), 'Баярлалаа! ⭐', true);
+    status: 'approved', email: '', phone: '', message: '', service: '', date: '',
+    nationality: '', purpose: '',
+    submitted_at: new Date().toLocaleString('mn-MN'),
+    created_at:   new Date().toISOString()
+  }), 'Үнэлгээ тавьсанд баярлалаа! ⭐', true);
+});
+
+document.querySelectorAll('.star-btn').forEach(b => b.addEventListener('click', () => {
+  selectedRating = parseInt(b.dataset.star); updateStarUI();
+}));
+function updateStarUI() {
+  document.querySelectorAll('.star-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.star) <= selectedRating);
+  });
+}
+
+// ======================================================
+// NAV / SCROLL / MOBILE
+// ======================================================
+function toggleMobileMenu() {
+  const m = document.getElementById('mobile-menu');
+  m.style.display = (m.style.display === 'none' || !m.style.display) ? 'block' : 'none';
+}
+function closeMobileMenu() { document.getElementById('mobile-menu').style.display = 'none'; }
+
+function handleScroll() {
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}
+
+function checkMobile() {
+  const btn   = document.getElementById('menu-btn');
+  const links = document.querySelector('.nav-links');
+  if (window.innerWidth <= 900) {
+    btn.style.display = 'block';
+    if (links) links.style.display = 'none';
+  } else {
+    btn.style.display = 'none';
+    document.getElementById('mobile-menu').style.display = 'none';
+    if (links) links.style.display = 'flex';
+  }
+}
+
+// ======================================================
+// INIT
+// ======================================================
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+  handleScroll();
+  checkMobile();
+  loadAllData();
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', checkMobile);
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('login-modal').style.display !== 'none') {
+      if (/^[0-9]$/.test(e.key)) pinPress(e.key);
+      if (e.key === 'Backspace')  pinBackspace();
+      if (e.key === 'Escape')     closeLoginModal();
+    }
+  });
 });
 </script>
 </body>
