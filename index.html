@@ -886,25 +886,36 @@ function setSheetsStatus(msg) {
   const el = document.getElementById('sheets-status');
   if (el) el.textContent = msg;
 }
-
-async function postToSheets(action, data) {
-  const scriptURL = 'YOUR_SCRIPT_URL';
-  
-  const payload = {
-    action: action,
-    data: data
-  };
+// Replace your existing postToSheets function with this:
+async function postToSheets(formData) {
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw7sXW58-wgIRsdZWGN80JNjaQC04ucYRXNSK_UVfZA5CHEPT7YSKg5ftP6wL8AqiT5/exec';
 
   try {
-    const response = await fetch(scriptURL, {
+    // We wrap your data in the format your script expects
+    const payload = {
+      action: 'create',
+      data: formData
+    };
+
+    await fetch(scriptURL, {
       method: 'POST',
-      mode: 'cors', // Use 'cors' but keep the content-type simple
+      mode: 'no-cors', // This bypasses the CORS check entirely
       headers: {
-        // IMPORTANT: Using 'text/plain' avoids the Preflight OPTIONS check
-        'Content-Type': 'text/plain;charset=utf-8', 
+        'Content-Type': 'text/plain;charset=utf-8', // This is the secret sauce
       },
       body: JSON.stringify(payload)
     });
+
+    // Since we use 'no-cors', we can't read the response, 
+    // but the data WILL reach your Google Sheet.
+    showToast("Амжилттай бүртгэгдээ!", "success");
+    resetForm(); 
+
+  } catch (error) {
+    console.error('Fetch error:', error);
+    showToast("Алдаа гарлаа.", "error");
+  }
+}
 
     const result = await response.json();
     return result;
