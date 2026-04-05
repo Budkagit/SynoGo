@@ -11,131 +11,60 @@
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 
   <style>
-    /* (keep all your existing styles – no changes needed) */
     :root {
-      --cream:    #F4F5E6;
-      --orange:   #F44C00;
-      --blush:    #E6C6AC;
-      --peach:    #FFE1D3;
-      --gray:     #B5B5B5;
-      --black:    #000000;
-      --white:    #FFFFFF;
+      --cream:      #F4F5E6;
+      --orange:     #F44C00;
+      --blush:      #E6C6AC;
+      --peach:      #FFE1D3;
+      --gray:       #B5B5B5;
+      --black:      #000000;
+      --white:      #FFFFFF;
       --cream-dark: #E8E9D8;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--cream);
-      color: var(--black);
-      overflow-x: hidden;
-    }
-
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--black); overflow-x: hidden; }
     .font-display { font-family: 'Fraunces', Georgia, serif; }
-
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--cream); }
     ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(244,245,230,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: box-shadow 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(244,245,230,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.06); transition: box-shadow 0.3s; }
     nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 24px;
-      height: 68px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--black); }
-    .logo-mark {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: var(--orange);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: white;
-    }
+    .logo-mark { width: 40px; height: 40px; border-radius: 12px; background: var(--orange); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: white; }
     .logo-text { font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
     .logo-text span { color: var(--orange); }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.6); transition: color 0.2s; }
     .nav-links a:hover { color: var(--orange); }
-    .nav-cta {
-      background: var(--orange); color: white !important;
-      padding: 10px 22px; border-radius: 100px;
-      font-weight: 600 !important; font-size: 14px !important;
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
+    .nav-cta { background: var(--orange); color: white !important; padding: 10px 22px; border-radius: 100px; font-weight: 600 !important; font-size: 14px !important; transition: transform 0.2s, box-shadow 0.2s !important; }
     .nav-cta:hover { transform: translateY(-1px) !important; box-shadow: 0 6px 20px rgba(244,76,0,0.3) !important; }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh; padding: 120px 24px 80px;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-    }
+    .hero { min-height: 100vh; padding: 120px 24px 80px; display: flex; align-items: center; position: relative; overflow: hidden; }
     .hero-bg-blob { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-    .hero-inner {
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--peach); border: 1px solid var(--blush);
-      padding: 8px 16px; border-radius: 100px;
-      font-size: 13px; font-weight: 600; color: var(--orange); margin-bottom: 28px;
-    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--peach); border: 1px solid var(--blush); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--orange); margin-bottom: 28px; }
     .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-
-    h1.hero-title {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(3rem, 5.5vw, 5rem);
-      font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
-      color: var(--black); margin-bottom: 24px;
-    }
+    h1.hero-title { font-family: 'Fraunces', serif; font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; color: var(--black); margin-bottom: 24px; }
     h1.hero-title em { font-style: italic; color: var(--orange); }
     .hero-sub { font-size: 17px; line-height: 1.7; color: rgba(0,0,0,0.55); margin-bottom: 40px; max-width: 440px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--orange); color: white;
-      padding: 14px 28px; border-radius: 100px;
-      font-weight: 700; font-size: 15px;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: white; padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 15px; text-decoration: none; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(244,76,0,0.3); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--black);
-      padding: 14px 28px; border-radius: 100px;
-      font-weight: 600; font-size: 15px;
-      text-decoration: none; border: 2px solid rgba(0,0,0,0.12); cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--black); padding: 14px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; text-decoration: none; border: 2px solid rgba(0,0,0,0.12); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
     .btn-secondary:hover { border-color: var(--black); background: rgba(0,0,0,0.04); }
-
     .hero-stats { display: flex; margin-top: 48px; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; overflow: hidden; background: white; }
     .hero-stat { flex: 1; padding: 18px 20px; text-align: center; border-right: 1px solid rgba(0,0,0,0.06); }
     .hero-stat:last-child { border-right: none; }
     .hero-stat-num { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--orange); }
     .hero-stat-label { font-size: 12px; color: var(--gray); margin-top: 2px; font-weight: 500; }
-
     .hero-visual { position: relative; }
     .hero-card-main { background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); position: relative; z-index: 2; }
-    .hero-card-float {
-      position: absolute; background: white; border-radius: 16px; padding: 14px 18px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;
-      font-size: 13px; font-weight: 600; animation: floatCard 4s ease-in-out infinite;
-      max-width: 320px;
-    }
+    .hero-card-float { position: absolute; background: white; border-radius: 16px; padding: 14px 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; animation: floatCard 4s ease-in-out infinite; max-width: 320px; }
     @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .uni-chip { display: inline-flex; align-items: center; background: var(--peach); border-radius: 100px; padding: 5px 10px; font-size: 11px; font-weight: 600; color: var(--orange); margin: 3px 3px 3px 0; }
     .admit-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -145,7 +74,6 @@
     .admit-scholarship { font-size: 10px; color: var(--orange); font-weight: 600; white-space: nowrap; }
     .admit-year { font-size: 10px; color: var(--gray); }
 
-    /* SECTIONS */
     .section { padding: 96px 24px; }
     .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
@@ -154,7 +82,6 @@
     .section-title em { font-style: italic; color: var(--orange); }
     .section-sub { font-size: 17px; color: rgba(0,0,0,0.5); line-height: 1.7; max-width: 540px; margin-top: 16px; }
 
-    /* ABOUT */
     #about { background: var(--black); }
     #about .section-label { color: var(--peach); }
     #about .section-label::before { background: var(--peach); }
@@ -170,15 +97,9 @@
     .mission-stat-num { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 700; color: var(--orange); }
     .mission-stat-desc { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 4px; }
 
-    /* SERVICES */
     #services { background: var(--cream); }
     .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 56px; }
-    .service-card {
-      background: white; border-radius: 20px; padding: 32px;
-      border: 1px solid rgba(0,0,0,0.06);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative; overflow: hidden;
-    }
+    .service-card { background: white; border-radius: 20px; padding: 32px; border: 1px solid rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
     .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
     .service-card:hover::before { transform: scaleX(1); }
@@ -200,7 +121,6 @@
     .featured-points li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 12px; line-height: 1.5; }
     .featured-points li::before { content: '✓'; font-weight: 700; color: white; background: rgba(255,255,255,0.2); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
 
-    /* CONSULTING */
     #consulting { background: var(--peach); }
     .consulting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 56px; }
     .consult-card { background: white; border-radius: 16px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.25s, box-shadow 0.25s; }
@@ -218,7 +138,6 @@
     .pricing-features li:last-child { border: none; }
     .check-badge { width: 22px; height: 22px; border-radius: 50%; background: rgba(244,76,0,0.2); color: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
 
-    /* MENTORS */
     #mentors { background: var(--cream); }
     .mentors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
     .mentor-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; }
@@ -231,7 +150,6 @@
     .mentor-desc { font-size: 13px; color: rgba(0,0,0,0.55); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
     .mentor-tag { display: inline-flex; background: var(--peach); color: var(--orange); border-radius: 100px; padding: 4px 10px; font-size: 11px; font-weight: 600; margin: 2px; }
 
-    /* SUCCESS */
     #success { background: var(--black); }
     #success .section-label { color: var(--peach); }
     #success .section-label::before { background: var(--peach); }
@@ -247,7 +165,7 @@
     .success-quote { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; font-style: italic; }
     .scholarship-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(244,76,0,0.15); border: 1px solid rgba(244,76,0,0.3); color: var(--orange); border-radius: 100px; padding: 5px 12px; font-size: 11px; font-weight: 700; margin-top: 14px; }
 
-    /* BOOKING */
+    /* ── BOOKING ── */
     #booking { background: var(--cream); }
     .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 56px; }
     .booking-info h3 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; margin-bottom: 16px; }
@@ -256,18 +174,77 @@
     .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--peach); display: flex; align-items: center; justify-content: center; color: var(--orange); flex-shrink: 0; }
     .contact-label { font-size: 12px; color: var(--gray); font-weight: 600; }
     .contact-value { font-size: 14px; font-weight: 600; }
-
     .booking-form { background: white; border-radius: 24px; padding: 36px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); }
-    .form-label { display: block; font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.6); margin-bottom: 7px; }
-    .form-input { width: 100%; background: var(--cream); border: 1.5px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 13px 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--black); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
-    .form-input::placeholder { color: rgba(0,0,0,0.3); }
-    .form-input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(244,76,0,0.1); background: white; }
-    select.form-input option { background: white; }
-    textarea.form-input { resize: none; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { margin-bottom: 16px; }
 
-    /* REVIEWS */
+    /* ── GOOGLE FORMS CARD ── */
+    .gform-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+    .gform-icon-wrap {
+      width: 76px; height: 76px;
+      border-radius: 22px;
+      background: var(--peach);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(244,76,0,0.15);
+    }
+    .gform-title {
+      font-family: 'Fraunces', serif;
+      font-size: 24px; font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .gform-desc {
+      font-size: 14px; color: rgba(0,0,0,0.5); line-height: 1.75;
+      margin-bottom: 28px; max-width: 340px;
+    }
+    .gform-fields {
+      width: 100%;
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .gform-fields-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray); margin-bottom: 14px;
+    }
+    .gform-field-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: rgba(0,0,0,0.65);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .gform-field-row:last-child { border-bottom: none; }
+    .gform-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: white;
+      padding: 16px 32px; border-radius: 100px;
+      font-weight: 700; font-size: 16px;
+      text-decoration: none; width: 100%; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .gform-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    }
+    .gform-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(244,76,0,0.35); }
+    .gform-note {
+      font-size: 12px; color: rgba(0,0,0,0.28); margin-top: 14px;
+      display: flex; align-items: center; gap: 5px; justify-content: center;
+    }
+
+    /* ── REVIEWS ── */
     #reviews { background: var(--cream-dark); }
     .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
     .review-card { background: white; border-radius: 20px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); }
@@ -277,8 +254,13 @@
     .review-sub { font-size: 12px; color: var(--gray); }
     .star-btn { background: none; border: none; cursor: pointer; font-size: 28px; color: var(--blush); transition: color 0.15s, transform 0.15s; padding: 0 3px; }
     .star-btn:hover, .star-btn.active { color: var(--orange); transform: scale(1.2); }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.6); margin-bottom: 7px; }
+    .form-input { width: 100%; background: var(--cream); border: 1.5px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 13px 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--black); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-input::placeholder { color: rgba(0,0,0,0.3); }
+    .form-input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(244,76,0,0.1); background: white; }
+    textarea.form-input { resize: none; }
+    .form-group { margin-bottom: 16px; }
 
-    /* FOOTER */
     footer { background: var(--black); color: white; padding: 64px 24px 32px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
@@ -289,19 +271,16 @@
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
 
-    /* MODALS */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
     .modal-content { background: white; border-radius: 24px; max-width: 860px; width: 95%; max-height: 90vh; overflow-y: auto; padding: 36px; box-shadow: 0 32px 80px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out; }
     .login-modal { background: white; border-radius: 24px; max-width: 400px; width: 95%; padding: 44px; box-shadow: 0 32px 80px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out; }
     @keyframes slideIn { from{opacity:0;transform:translateY(-16px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
-
     .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.15); transition: all 0.2s; }
     .pin-dot.filled { background: var(--orange); border-color: var(--orange); }
     .pin-btn { width: 68px; height: 68px; border-radius: 16px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--cream); color: var(--black); font-size: 20px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     .pin-btn:hover { background: var(--peach); border-color: var(--orange); }
     .pin-btn:active { transform: scale(0.94); }
     .pin-sub { font-size: 9px; color: var(--gray); letter-spacing: 0.1em; margin-top: 1px; }
-
     .admin-tab { padding: 8px 18px; border-radius: 100px; cursor: pointer; transition: all 0.2s; font-size: 13px; font-weight: 600; border: none; background: none; }
     .admin-tab.active { background: var(--orange); color: white; }
     .admin-tab:not(.active) { color: rgba(0,0,0,0.5); }
@@ -333,7 +312,6 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
     .animate-shake { animation: shake 0.4s ease; }
-
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -380,12 +358,12 @@
     </button>
   </div>
   <div id="mobile-menu" style="display:none;padding:16px 24px;background:white;border-top:1px solid rgba(0,0,0,0.06)">
-    <a href="#about" onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Бидний тухай</a>
-    <a href="#services" onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Үйлчилгээ</a>
-    <a href="#consulting" onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Зөвлөгөө</a>
-    <a href="#mentors" onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Менторууд</a>
-    <a href="#success" onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Амжилт</a>
-    <a href="#booking" onclick="closeMobileMenu()" style="display:block;margin-top:12px;text-align:center;background:var(--orange);color:white;padding:14px;border-radius:12px;font-weight:700;text-decoration:none">Захиалах</a>
+    <a href="#about"     onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Бидний тухай</a>
+    <a href="#services"  onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Үйлчилгээ</a>
+    <a href="#consulting"onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Зөвлөгөө</a>
+    <a href="#mentors"   onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Менторууд</a>
+    <a href="#success"   onclick="closeMobileMenu()" style="display:block;padding:12px 0;font-size:15px;font-weight:600;color:var(--black);text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.06)">Амжилт</a>
+    <a href="#booking"   onclick="closeMobileMenu()" style="display:block;margin-top:12px;text-align:center;background:var(--orange);color:white;padding:14px;border-radius:12px;font-weight:700;text-decoration:none">Захиалах</a>
   </div>
 </nav>
 
@@ -433,11 +411,8 @@
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.06)">
           <div style="font-size:11px;color:var(--gray);margin-bottom:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Амжилттай элссэн их сургуулиуд</div>
           <div>
-            <span class="uni-chip">Tsinghua</span>
-            <span class="uni-chip">PKU</span>
-            <span class="uni-chip">SJTU</span>
-            <span class="uni-chip">Xi'an JTU</span>
-            <span class="uni-chip">HIT</span>
+            <span class="uni-chip">Tsinghua</span><span class="uni-chip">PKU</span>
+            <span class="uni-chip">SJTU</span><span class="uni-chip">Xi'an JTU</span><span class="uni-chip">HIT</span>
           </div>
         </div>
       </div>
@@ -637,15 +612,20 @@
   </div>
 </section>
 
-<!-- BOOKING -->
+<!-- ═══════════════════════════════════════════════════════
+     BOOKING — Google Forms integration
+     Link: https://forms.gle/rX53DkF6cU3TSQpM8
+════════════════════════════════════════════════════════ -->
 <section id="booking" class="section">
   <div class="section-inner reveal">
     <div class="section-label">Захиалга</div>
     <h2 class="section-title">Аялалаа <em>эхлүүлэцгээе</em></h2>
     <div class="booking-grid">
+
+      <!-- Left: contact info -->
       <div class="booking-info">
         <h3>Бидэнтэй холбогдоорой</h3>
-        <p>Дараагийн алхам нь энгийн — доорх маягтыг бөглөөрэй. Бид 12 цагт хариулах болно.</p>
+        <p>Захиалга маягтыг бөглөөрэй. Бид 12 цагийн дотор хариулах болно.</p>
         <div class="contact-row"><div class="contact-icon"><i data-lucide="mail" style="width:18px;height:18px"></i></div><div><div class="contact-label">ИМЭЙЛ</div><div class="contact-value">synogomongolia@gmail.com</div></div></div>
         <div class="contact-row"><div class="contact-icon"><i data-lucide="phone" style="width:18px;height:18px"></i></div><div><div class="contact-label">УТАС / ВАТСАП</div><div class="contact-value">+976 9900 0000</div></div></div>
         <div class="contact-row"><div class="contact-icon"><i data-lucide="map-pin" style="width:18px;height:18px"></i></div><div><div class="contact-label">БАЙРШИЛ</div><div class="contact-value">Улаанбаатар, Монгол Улс</div></div></div>
@@ -656,32 +636,46 @@
           <div style="font-size:14px;color:rgba(0,0,0,0.5);margin-top:8px;line-height:1.6">Таны ирээдүйд хийх хамгийн ухаалаг хөрөнгө оруулалт</div>
         </div>
       </div>
+
+      <!-- Right: Google Forms card -->
       <div>
-        <form id="booking-form" class="booking-form">
-          <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:700;margin-bottom:24px">Захиалга илгээх</h3>
-          <div class="form-row">
-            <div class="form-group"><label class="form-label">Овог Нэр *</label><input id="book-name" type="text" required class="form-input" placeholder="Таны бүтэн нэр"></div>
-            <div class="form-group"><label class="form-label">Имэйл *</label><input id="book-email" type="email" required class="form-input" placeholder="your@email.com"></div>
+        <div class="gform-card">
+          <div class="gform-icon-wrap">
+            <i data-lucide="calendar-check" style="width:34px;height:34px;color:var(--orange)"></i>
           </div>
-          <div class="form-row">
-            <div class="form-group"><label class="form-label">Утас</label><input id="book-phone" type="tel" class="form-input" placeholder="+976 XXXX XXXX"></div>
-            <div class="form-group"><label class="form-label">Үйлчилгээ *</label>
-              <select id="book-service" required class="form-input">
-                <option value="">Сонгоно уу</option>
-                <option value="consulting">Consulting | Зөвлөгөө — ₮40,000</option>
-                <option value="mentorship">Mentorship | Менторшип — ₮200,000</option>
-                <option value="application">Application Prep | Өргөдлийн бэлтгэл</option>
-                <option value="csc">CSC Prep | Засгийн газрын тэтгэлэг</option>
-              </select>
-            </div>
+          <div class="gform-title">Захиалга илгээх</div>
+          <p class="gform-desc">
+            Google Forms маягтыг бөглөнө үү. Хэдхэн минутын дотор дуусгаж болно —
+            бид 12 цагийн дотор холбогдоно. 🎓
+          </p>
+
+          <!-- Field preview -->
+          <div class="gform-fields">
+            <div class="gform-fields-label">Маягтад дараах зүйлс багтана</div>
+            <div class="gform-field-row"><i data-lucide="user"          style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Овог Нэр</div>
+            <div class="gform-field-row"><i data-lucide="mail"          style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Имэйл хаяг</div>
+            <div class="gform-field-row"><i data-lucide="phone"         style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Утасны дугаар</div>
+            <div class="gform-field-row"><i data-lucide="layers"        style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Үйлчилгээний төрөл</div>
+            <div class="gform-field-row"><i data-lucide="calendar"      style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Захиалгын огноо</div>
+            <div class="gform-field-row"><i data-lucide="message-square" style="width:14px;height:14px;color:var(--orange);flex-shrink:0"></i>Нэмэлт мэдээлэл</div>
           </div>
-          <div class="form-group"><label class="form-label">Үйлчилгээ авах огноо *</label><input id="book-date" type="date" required class="form-input"></div>
-          <div class="form-group"><label class="form-label">Нэмэлт мэдээлэл</label><textarea id="book-message" rows="3" class="form-input" placeholder="Танд ямар асуудал байна вэ?"></textarea></div>
-          <button id="booking-submit-btn" type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:15px">
-            <i data-lucide="send" style="width:17px;height:17px"></i><span>Захиалга илгээх</span>
-          </button>
-        </form>
+
+          <!-- THE BUTTON -->
+          <a class="gform-btn"
+             href="https://forms.gle/rX53DkF6cU3TSQpM8"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i data-lucide="external-link" style="width:19px;height:19px"></i>
+            Захиалга илгээх
+          </a>
+
+          <div class="gform-note">
+            <i data-lucide="shield-check" style="width:13px;height:13px;color:var(--gray)"></i>
+            Google Forms · шинэ таб нээгдэнэ · акаунт шаардахгүй
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -809,20 +803,20 @@
         <div class="stat-card"><div class="stat-num" style="color:#16a34a" id="sc-reviews">0</div><div class="stat-label">Үнэлгээ</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-        <button class="admin-tab active" data-admin-tab="orders" onclick="switchAdminTab('orders')">Захиалга</button>
-        <button class="admin-tab" data-admin-tab="members" onclick="switchAdminTab('members')">Гишүүд</button>
-        <button class="admin-tab" data-admin-tab="contacts" onclick="switchAdminTab('contacts')">Мессеж</button>
-        <button class="admin-tab" data-admin-tab="reviews" onclick="switchAdminTab('reviews')">Үнэлгээ</button>
+        <button class="admin-tab active" data-admin-tab="orders"   onclick="switchAdminTab('orders')">Захиалга</button>
+        <button class="admin-tab"        data-admin-tab="members"  onclick="switchAdminTab('members')">Гишүүд</button>
+        <button class="admin-tab"        data-admin-tab="contacts" onclick="switchAdminTab('contacts')">Мессеж</button>
+        <button class="admin-tab"        data-admin-tab="reviews"  onclick="switchAdminTab('reviews')">Үнэлгээ</button>
         <div style="margin-left:auto;position:relative">
           <i data-lucide="search" style="width:13px;height:13px;position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray);pointer-events:none"></i>
           <input id="admin-search" type="text" class="search-box" placeholder="Хайх..." oninput="renderAdminContent()">
         </div>
       </div>
       <div style="display:flex;gap:6px;margin-bottom:16px">
-        <button class="sf-btn active" data-sf="all" onclick="setSF('all')">Бүгд</button>
-        <button class="sf-btn" data-sf="pending" onclick="setSF('pending')">Хүлээгдэж буй</button>
-        <button class="sf-btn" data-sf="approved" onclick="setSF('approved')">Баталгаажсан</button>
-        <button class="sf-btn" data-sf="rejected" onclick="setSF('rejected')">Татгалзсан</button>
+        <button class="sf-btn active" data-sf="all"      onclick="setSF('all')">Бүгд</button>
+        <button class="sf-btn"        data-sf="pending"  onclick="setSF('pending')">Хүлээгдэж буй</button>
+        <button class="sf-btn"        data-sf="approved" onclick="setSF('approved')">Баталгаажсан</button>
+        <button class="sf-btn"        data-sf="rejected" onclick="setSF('rejected')">Татгалзсан</button>
       </div>
       <div id="admin-content" style="max-height:440px;overflow-y:auto">
         <p style="text-align:center;padding:40px;color:var(--gray);font-style:italic">Өгөгдөл байхгүй байна.</p>
@@ -832,228 +826,124 @@
 </div>
 
 <script>
-// ======================================================
-// CONFIG — update this with your deployed Apps Script URL
-
-// ======================================================
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwNDfLOfiViMRPG0MKse2wLmD2PI81WK7AFp-jr6xJKTntMdf7czx18avhAvuN92l74/exec'; // ← REPLACE WITH YOUR DEPLOYED URL
+// ── CONFIG ──────────────────────────────────────────────
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwNDfLOfiViMRPG0MKse2wLmD2PI81WK7AFp-jr6xJKTntMdf7czx18avhAvuN92l74/exec';
 const ADMIN_PIN  = '1234';
 
-// ======================================================
-// STATE
-// ======================================================
+// ── STATE ───────────────────────────────────────────────
 let allData = [], currentAdminTab = 'orders', currentSF = 'all';
 let selectedRating = 0, adminLoggedIn = false, pinEntry = '';
 let adminModalVisible = false;
 
-// ======================================================
-// HELPER: Show toast message
-// ======================================================
+// ── TOAST ───────────────────────────────────────────────
 function showToast(msg, isError = false) {
   const c = document.getElementById('toast-container');
   const t = document.createElement('div');
   t.className = 'toast' + (isError ? ' error' : '');
   t.textContent = msg;
   c.appendChild(t);
-  setTimeout(() => {
-    t.style.opacity = '0';
-    t.style.transition = 'opacity 0.4s';
-    setTimeout(() => t.remove(), 400);
-  }, 3500);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity 0.4s'; setTimeout(()=>t.remove(),400); }, 3500);
 }
 
-// ======================================================
-// SHEETS API – direct fetch (CORS handled by Apps Script)
-// ======================================================
+// ── SHEETS (read-only for admin panel) ──────────────────
 async function fetchFromSheets() {
   setSheetsStatus('Ачааллаж байна...');
   try {
-    const url = SHEETS_URL + '?action=getAll&t=' + Date.now();
-    const res = await fetch(url);
+    const res  = await fetch(SHEETS_URL + '?action=getAll&t=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error('Буруу формат');
     setSheetsStatus('Холбогдсон ✓ · ' + data.length + ' бичлэг');
     return data;
-  } catch (e) {
-    console.error(e);
-    setSheetsStatus('Алдаа: ' + e.message);
-    return [];
-  }
+  } catch(e) { setSheetsStatus('Алдаа: ' + e.message); return []; }
 }
-
-function setSheetsStatus(msg) {
-  const el = document.getElementById('sheets-status');
-  if (el) el.textContent = msg;
-}
-
-async function postToSheets(action, data) {
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxqJOtCzUyh79r6eE8XCb5akQvdi_6V-n92KVhzfxEOe3KEPrDYX92KHitnVXa6fH0J/exec';
-  
-  const payload = {
-    action: action,
-    data: data
-  };
-
-  try {
-    const response = await fetch(scriptURL, {
-      method: 'POST',
-      mode: 'cors', // Use 'cors' but keep the content-type simple
-      headers: {
-        // IMPORTANT: Using 'text/plain' avoids the Preflight OPTIONS check
-        'Content-Type': 'text/plain;charset=utf-8', 
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error("CORS or Network Error:", error);
-  }
-}
+function setSheetsStatus(msg) { const el=document.getElementById('sheets-status'); if(el) el.textContent=msg; }
 
 async function patchStatusInSheets(rowId, st) {
   try {
-    const res = await fetch(SHEETS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'updateStatus', id: rowId, status: st })
-    });
-    const result = await res.json();
-    return { ok: result.ok };
-  } catch(e) {
-    return { ok: false };
-  }
+    const res = await fetch(SHEETS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'updateStatus',id:rowId,status:st}) });
+    return { ok: (await res.json()).ok };
+  } catch(e) { return {ok:false}; }
 }
-
 async function deleteFromSheets(rowId) {
   try {
-    const res = await fetch(SHEETS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'delete', id: rowId })
-    });
-    const result = await res.json();
-    return { ok: result.ok };
-  } catch(e) {
-    return { ok: false };
-  }
+    const res = await fetch(SHEETS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'delete',id:rowId}) });
+    return { ok: (await res.json()).ok };
+  } catch(e) { return {ok:false}; }
 }
 
 async function loadAllData() {
   const data = await fetchFromSheets();
   allData = data;
-  renderReviews();
-  updateStats();
+  renderReviews(); updateStats();
   if (adminLoggedIn && adminModalVisible) renderAdminContent();
 }
 
-// ======================================================
-// PIN LOGIN
-// ======================================================
+// ── PIN LOGIN ────────────────────────────────────────────
 function openLoginModal() {
   if (adminLoggedIn) { openAdminModal(); return; }
-  pinEntry = ''; updatePinDots();
-  document.getElementById('login-error').style.display = 'none';
-  document.getElementById('login-modal').style.display = 'block';
+  pinEntry=''; updatePinDots();
+  document.getElementById('login-error').style.display='none';
+  document.getElementById('login-modal').style.display='block';
   lucide.createIcons();
 }
-function closeLoginModal() {
-  document.getElementById('login-modal').style.display = 'none';
-  pinEntry = ''; updatePinDots();
-}
-function closeLoginOnBackdrop(e) { if (e.target === e.currentTarget) closeLoginModal(); }
+function closeLoginModal() { document.getElementById('login-modal').style.display='none'; pinEntry=''; updatePinDots(); }
+function closeLoginOnBackdrop(e) { if(e.target===e.currentTarget) closeLoginModal(); }
 function pinPress(d) {
-  if (pinEntry.length >= 4) return;
-  pinEntry += d; updatePinDots();
-  if (pinEntry.length === 4) setTimeout(checkPin, 150);
+  if(pinEntry.length>=4) return;
+  pinEntry+=d; updatePinDots();
+  if(pinEntry.length===4) setTimeout(checkPin,150);
 }
-function pinBackspace() { pinEntry = pinEntry.slice(0, -1); updatePinDots(); }
+function pinBackspace() { pinEntry=pinEntry.slice(0,-1); updatePinDots(); }
 function updatePinDots() {
-  for (let i = 0; i < 4; i++) {
-    const el = document.getElementById('dot-' + i);
-    if (i < pinEntry.length) el.classList.add('filled');
-    else el.classList.remove('filled');
-  }
+  for(let i=0;i<4;i++) { const el=document.getElementById('dot-'+i); el.classList.toggle('filled', i<pinEntry.length); }
 }
 function checkPin() {
-  if (pinEntry === ADMIN_PIN) {
-    adminLoggedIn = true; closeLoginModal(); openAdminModal();
-  } else {
-    document.getElementById('login-error').style.display = 'block';
-    const pad = document.getElementById('pin-pad');
-    pad.classList.add('animate-shake');
-    setTimeout(() => pad.classList.remove('animate-shake'), 400);
-    pinEntry = ''; updatePinDots();
+  if(pinEntry===ADMIN_PIN) { adminLoggedIn=true; closeLoginModal(); openAdminModal(); }
+  else {
+    document.getElementById('login-error').style.display='block';
+    const pad=document.getElementById('pin-pad'); pad.classList.add('animate-shake'); setTimeout(()=>pad.classList.remove('animate-shake'),400);
+    pinEntry=''; updatePinDots();
   }
 }
-function logoutAdmin() { adminLoggedIn = false; closeAdminModal(); showToast('Системээс гарлаа.'); }
+function logoutAdmin() { adminLoggedIn=false; closeAdminModal(); showToast('Системээс гарлаа.'); }
 
-// ======================================================
-// ADMIN PANEL
-// ======================================================
-function openAdminModal() {
-  adminModalVisible = true;
-  document.getElementById('admin-modal').style.display = 'block';
-  lucide.createIcons();
-  refreshAdminData();
-}
-function closeAdminModal() { adminModalVisible = false; document.getElementById('admin-modal').style.display = 'none'; }
-function closeAdminOnBackdrop(e) { if (e.target === e.currentTarget) closeAdminModal(); }
+// ── ADMIN PANEL ──────────────────────────────────────────
+function openAdminModal() { adminModalVisible=true; document.getElementById('admin-modal').style.display='block'; lucide.createIcons(); refreshAdminData(); }
+function closeAdminModal() { adminModalVisible=false; document.getElementById('admin-modal').style.display='none'; }
+function closeAdminOnBackdrop(e) { if(e.target===e.currentTarget) closeAdminModal(); }
 
 async function refreshAdminData() {
-  const btn = document.getElementById('admin-refresh-btn');
-  if (btn) {
-    btn.innerHTML = '<span class="spinner" style="border-color:rgba(244,76,0,0.2);border-top-color:var(--orange)"></span>';
-    btn.disabled = true;
-  }
+  const btn=document.getElementById('admin-refresh-btn');
+  if(btn){btn.innerHTML='<span class="spinner" style="border-color:rgba(244,76,0,0.2);border-top-color:var(--orange)"></span>';btn.disabled=true;}
   await loadAllData();
-  if (btn) {
-    btn.innerHTML = '<i data-lucide="refresh-cw" style="width:13px;height:13px"></i>Refresh';
-    btn.disabled = false;
-    lucide.createIcons();
-  }
+  if(btn){btn.innerHTML='<i data-lucide="refresh-cw" style="width:13px;height:13px"></i>Refresh';btn.disabled=false;lucide.createIcons();}
   showToast('Шинэчлэгдлээ ✓');
 }
-
-function switchAdminTab(t) {
-  currentAdminTab = t;
-  document.querySelectorAll('.admin-tab').forEach(b => b.classList.toggle('active', b.dataset.adminTab === t));
-  document.getElementById('admin-search').value = '';
-  renderAdminContent();
-}
-function setSF(s) {
-  currentSF = s;
-  document.querySelectorAll('.sf-btn').forEach(b => b.classList.toggle('active', b.dataset.sf === s));
-  renderAdminContent();
-}
+function switchAdminTab(t) { currentAdminTab=t; document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('active',b.dataset.adminTab===t)); document.getElementById('admin-search').value=''; renderAdminContent(); }
+function setSF(s) { currentSF=s; document.querySelectorAll('.sf-btn').forEach(b=>b.classList.toggle('active',b.dataset.sf===s)); renderAdminContent(); }
 function updateStats() {
-  const s = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = allData.filter(d => d.type === t).length; };
-  s('sc-orders','booking'); s('sc-members','membership'); s('sc-contacts','contact'); s('sc-reviews','review');
+  const s=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=allData.filter(d=>d.type===t).length;};
+  s('sc-orders','booking');s('sc-members','membership');s('sc-contacts','contact');s('sc-reviews','review');
 }
-
 function renderAdminContent() {
-  const c = document.getElementById('admin-content'); if (!c) return;
-  const tmap = { orders:'booking', members:'membership', contacts:'contact', reviews:'review' };
-  const q = (document.getElementById('admin-search')?.value || '').toLowerCase();
-  let items = allData.filter(d => d.type === tmap[currentAdminTab]);
-  if (currentSF !== 'all') items = items.filter(d => (d.status || 'pending') === currentSF);
-  if (q) items = items.filter(d => [d.name,d.email,d.message,d.service].some(v => (v||'').toLowerCase().includes(q)));
-  items = [...items].sort((a,b) => new Date(b.created_at||0) - new Date(a.created_at||0));
-  if (!items.length) {
-    c.innerHTML = '<p style="text-align:center;padding:40px;color:var(--gray);font-style:italic">Тохирох өгөгдөл байхгүй.</p>';
-    return;
-  }
-  c.innerHTML = items.map(item => {
-    const st = item.status || 'pending';
-    const bc = st==='approved' ? 'badge-approved' : st==='rejected' ? 'badge-rejected' : 'badge-pending';
-    const sl = st==='approved' ? 'Баталгаажсан' : st==='rejected' ? 'Татгалзсан' : 'Хүлээгдэж буй';
-    let sum = '';
-    if (item.type==='booking')    sum = `<span style="color:var(--orange)">${item.service||''}</span> · ${item.date||''}`;
-    if (item.type==='contact')    sum = (item.message||'').substring(0,70) + ((item.message?.length||0)>70?'…':'');
-    if (item.type==='review')     sum = '★'.repeat(item.rating||0) + ' · ' + (item.review_text||'').substring(0,55);
-    if (item.type==='membership') sum = `${item.nationality||''} · ${item.purpose||''}`;
+  const c=document.getElementById('admin-content'); if(!c) return;
+  const tmap={orders:'booking',members:'membership',contacts:'contact',reviews:'review'};
+  const q=(document.getElementById('admin-search')?.value||'').toLowerCase();
+  let items=allData.filter(d=>d.type===tmap[currentAdminTab]);
+  if(currentSF!=='all') items=items.filter(d=>(d.status||'pending')===currentSF);
+  if(q) items=items.filter(d=>[d.name,d.email,d.message,d.service].some(v=>(v||'').toLowerCase().includes(q)));
+  items=[...items].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+  if(!items.length){c.innerHTML='<p style="text-align:center;padding:40px;color:var(--gray);font-style:italic">Тохирох өгөгдөл байхгүй.</p>';return;}
+  c.innerHTML=items.map(item=>{
+    const st=item.status||'pending';
+    const bc=st==='approved'?'badge-approved':st==='rejected'?'badge-rejected':'badge-pending';
+    const sl=st==='approved'?'Баталгаажсан':st==='rejected'?'Татгалзсан':'Хүлээгдэж буй';
+    let sum='';
+    if(item.type==='booking')    sum=`<span style="color:var(--orange)">${item.service||''}</span> · ${item.date||''}`;
+    if(item.type==='contact')    sum=(item.message||'').substring(0,70)+((item.message?.length||0)>70?'…':'');
+    if(item.type==='review')     sum='★'.repeat(item.rating||0)+' · '+(item.review_text||'').substring(0,55);
+    if(item.type==='membership') sum=`${item.nationality||''} · ${item.purpose||''}`;
     return `<div class="admin-row" data-admin-id="${item.id}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
         <div style="flex:1;min-width:0;cursor:pointer" onclick="toggleDetail('${item.id}')">
@@ -1066,8 +956,8 @@ function renderAdminContent() {
           <p style="font-size:12px;color:rgba(0,0,0,0.4);margin-top:2px">${sum}</p>
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0">
-          ${st!=='approved' ? `<button onclick="adminUpdateStatus('${item.id}','approved')" style="width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,0.1);color:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="check" style="width:13px;height:13px"></i></button>` : ''}
-          ${st!=='rejected' ? `<button onclick="adminUpdateStatus('${item.id}','rejected')" style="width:32px;height:32px;border-radius:8px;background:rgba(220,38,38,0.06);color:#dc2626;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="x" style="width:13px;height:13px"></i></button>` : ''}
+          ${st!=='approved'?`<button onclick="adminUpdateStatus('${item.id}','approved')" style="width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,0.1);color:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="check" style="width:13px;height:13px"></i></button>`:''}
+          ${st!=='rejected'?`<button onclick="adminUpdateStatus('${item.id}','rejected')" style="width:32px;height:32px;border-radius:8px;background:rgba(220,38,38,0.06);color:#dc2626;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="x" style="width:13px;height:13px"></i></button>`:''}
           <button onclick="confirmDelete('${item.id}')" style="width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,0.04);color:var(--gray);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>
         </div>
       </div>
@@ -1078,187 +968,100 @@ function renderAdminContent() {
   }).join('');
   lucide.createIcons();
 }
+function toggleDetail(id){const el=document.getElementById('d-'+id);if(el)el.style.display=el.style.display==='none'?'block':'none';}
+async function adminUpdateStatus(id,st){const item=allData.find(d=>d.id===id);if(!item)return;item.status=st;renderAdminContent();updateStats();showToast(st==='approved'?'Баталгаажлаа ✓':'Татгалзлаа');await patchStatusInSheets(id,st);}
+function confirmDelete(id){const card=document.querySelector(`[data-admin-id="${id}"]`);if(!card)return;const o=document.createElement('div');o.className='confirm-overlay';o.innerHTML=`<span style="font-size:14px;font-weight:600">Устгах уу?</span><button onclick="doDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--orange);color:white;font-size:13px;font-weight:700;border:none;cursor:pointer">Тийм</button><button onclick="cancelDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--cream);color:var(--black);font-size:13px;border:1px solid rgba(0,0,0,0.1);cursor:pointer">Үгүй</button>`;card.appendChild(o);}
+function cancelDelete(id){const c=document.querySelector(`[data-admin-id="${id}"]`);if(c){const o=c.querySelector('.confirm-overlay');if(o)o.remove();}}
+async function doDelete(id){allData=allData.filter(d=>d.id!==id);renderAdminContent();updateStats();renderReviews();showToast('Устгагдлаа.');await deleteFromSheets(id);}
 
-function toggleDetail(id) {
-  const el = document.getElementById('d-' + id);
-  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-async function adminUpdateStatus(id, st) {
-  const item = allData.find(d => d.id === id); if (!item) return;
-  item.status = st; renderAdminContent(); updateStats();
-  showToast(st === 'approved' ? 'Баталгаажлаа ✓' : 'Татгалзлаа');
-  await patchStatusInSheets(id, st);
-}
-function confirmDelete(id) {
-  const card = document.querySelector(`[data-admin-id="${id}"]`); if (!card) return;
-  const o = document.createElement('div');
-  o.className = 'confirm-overlay';
-  o.innerHTML = `<span style="font-size:14px;font-weight:600">Устгах уу?</span>
-    <button onclick="doDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--orange);color:white;font-size:13px;font-weight:700;border:none;cursor:pointer">Тийм</button>
-    <button onclick="cancelDelete('${id}')" style="padding:7px 16px;border-radius:8px;background:var(--cream);color:var(--black);font-size:13px;border:1px solid rgba(0,0,0,0.1);cursor:pointer">Үгүй</button>`;
-  card.appendChild(o);
-}
-function cancelDelete(id) {
-  const c = document.querySelector(`[data-admin-id="${id}"]`);
-  if (c) { const o = c.querySelector('.confirm-overlay'); if (o) o.remove(); }
-}
-async function doDelete(id) {
-  allData = allData.filter(d => d.id !== id);
-  renderAdminContent(); updateStats(); renderReviews();
-  showToast('Устгагдлаа.');
-  await deleteFromSheets(id);
-}
-
-// ======================================================
-// EXCEL EXPORT
-// ======================================================
+// ── EXCEL EXPORT ─────────────────────────────────────────
 function exportToExcel() {
-  if (typeof XLSX === 'undefined') { showToast('SheetJS ачаалагдаагүй.', true); return; }
-  const wb = XLSX.utils.book_new();
-  [
-    { type:'booking',    name:'Захиалга',  cols:['name','email','phone','service','date','message','status','submitted_at'] },
-    { type:'contact',    name:'Мессежүүд', cols:['name','email','message','status','submitted_at'] },
-    { type:'review',     name:'Үнэлгээ',   cols:['name','rating','review_text','status','submitted_at'] },
-    { type:'membership', name:'Гишүүд',    cols:['name','email','phone','nationality','purpose','message','status','submitted_at'] }
-  ].forEach(({ type, name, cols }) => {
-    const rows = allData.filter(d => d.type === type); if (!rows.length) return;
-    const ws = XLSX.utils.aoa_to_sheet([cols, ...rows.map(r => cols.map(c => r[c] ?? ''))]);
-    XLSX.utils.book_append_sheet(wb, ws, name);
+  if(typeof XLSX==='undefined'){showToast('SheetJS ачаалагдаагүй.',true);return;}
+  const wb=XLSX.utils.book_new();
+  [{type:'booking',name:'Захиалга',cols:['name','email','phone','service','date','message','status','submitted_at']},
+   {type:'contact',name:'Мессежүүд',cols:['name','email','message','status','submitted_at']},
+   {type:'review',name:'Үнэлгээ',cols:['name','rating','review_text','status','submitted_at']},
+   {type:'membership',name:'Гишүүд',cols:['name','email','phone','nationality','purpose','message','status','submitted_at']}
+  ].forEach(({type,name,cols})=>{
+    const rows=allData.filter(d=>d.type===type);if(!rows.length)return;
+    const ws=XLSX.utils.aoa_to_sheet([cols,...rows.map(r=>cols.map(c=>r[c]??''))]);
+    XLSX.utils.book_append_sheet(wb,ws,name);
   });
-  XLSX.writeFile(wb, `synogo-${new Date().toISOString().slice(0,10)}.xlsx`);
+  XLSX.writeFile(wb,`synogo-${new Date().toISOString().slice(0,10)}.xlsx`);
   showToast('Excel файл татагдлаа!');
 }
 
-// ======================================================
-// REVIEWS
-// ======================================================
-function renderReviews() {
-  const list = document.getElementById('reviews-list'); if (!list) return;
-  const reviews = allData.filter(d => d.type === 'review' && d.status === 'approved');
-  if (!reviews.length) {
-    list.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:40px;color:var(--gray);font-style:italic">Одоогоор үнэлгээ байхгүй. Та эхлэн үлдээгээрэй!</p>';
-    return;
-  }
-  list.innerHTML = reviews.map(r => `
-    <div class="review-card">
-      <div class="review-stars">${'★'.repeat(r.rating||0)}<span style="color:#e5e7eb">${'★'.repeat(5-(r.rating||0))}</span></div>
-      <p class="review-text">${r.review_text||''}</p>
-      <div class="review-author">${r.name}</div>
-      <div class="review-sub">${r.submitted_at||''}</div>
-    </div>`).join('');
-}
-
-// ======================================================
-// FORM SUBMIT
-// ======================================================
-async function postToSheets(payload) {
+// ── REVIEWS (submitted via on-page form, saved to Sheets) ─
+async function postReviewToSheets(payload) {
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxnjQmuNrF8817IZdGFhi53G-Yxo-qZClPceC3jLp1Y6PoZhypVbmlEhEqcsSjl47Fd/exec';
-  
   try {
-    await fetch(scriptURL, {
-      method: 'POST',
-      mode: 'no-cors', // This is required to bypass the CORS block
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
-      body: JSON.stringify(payload)
-    });
-
-    // Since 'no-cors' doesn't let us read the server response,
-    // we assume success if the fetch call itself didn't crash.
-    return { ok: true }; 
-    
-  } catch (error) {
-    console.error('Fetch error:', error);
-    return { ok: false };
-  }
+    await fetch(scriptURL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) });
+    return {ok:true};
+  } catch(e) { return {ok:false}; }
 }
 
-document.getElementById('booking-form').addEventListener('submit', e => {
+function renderReviews() {
+  const list=document.getElementById('reviews-list'); if(!list) return;
+  const reviews=allData.filter(d=>d.type==='review'&&d.status==='approved');
+  if(!reviews.length){list.innerHTML='<p style="text-align:center;grid-column:1/-1;padding:40px;color:var(--gray);font-style:italic">Одоогоор үнэлгээ байхгүй. Та эхлэн үлдээгээрэй!</p>';return;}
+  list.innerHTML=reviews.map(r=>`<div class="review-card"><div class="review-stars">${'★'.repeat(r.rating||0)}<span style="color:#e5e7eb">${'★'.repeat(5-(r.rating||0))}</span></div><p class="review-text">${r.review_text||''}</p><div class="review-author">${r.name}</div><div class="review-sub">${r.submitted_at||''}</div></div>`).join('');
+}
+
+document.getElementById('review-form').addEventListener('submit', async e => {
   e.preventDefault();
-  submitForm('booking-form', 'booking-submit-btn', () => ({
-    type: 'booking',
-    name:    document.getElementById('book-name').value,
-    email:   document.getElementById('book-email').value,
-    phone:   document.getElementById('book-phone').value,
-    service: document.getElementById('book-service').value,
-    date:    document.getElementById('book-date').value,
-    message: document.getElementById('book-message').value,
-    status: 'pending', rating: 0, review_text: '', nationality: '', purpose: '',
-    submitted_at: new Date().toLocaleString('mn-MN'),
-    created_at:   new Date().toISOString()
-  }), 'Захиалга амжилттай илгээгдлээ! 12 цагт холбогдоно. 🎓', false);
+  if(!selectedRating){showToast('Үнэлгээгээ сонгоно уу.',true);return;}
+  const btn=document.getElementById('review-submit-btn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span><span>Илгээж байна...</span>';
+  const payload={
+    type:'review',
+    name:document.getElementById('review-name').value,
+    rating:selectedRating,
+    review_text:document.getElementById('review-text').value,
+    status:'approved',email:'',phone:'',message:'',service:'',date:'',nationality:'',purpose:'',
+    submitted_at:new Date().toLocaleString('mn-MN'),
+    created_at:new Date().toISOString()
+  };
+  const newReview={...payload,id:'local-'+Date.now()};
+  allData.push(newReview);
+  renderReviews();
+  await postReviewToSheets(payload);
+  showToast('Үнэлгээ тавьсанд баярлалаа! ⭐');
+  document.getElementById('review-form').reset();
+  selectedRating=0; updateStarUI();
+  btn.disabled=false;
+  btn.innerHTML='<i data-lucide="send" style="width:16px;height:16px"></i><span>Илгээх</span>';
+  lucide.createIcons();
 });
 
-document.getElementById('review-form').addEventListener('submit', e => {
-  e.preventDefault();
-  if (!selectedRating) { showToast('Үнэлгээгээ сонгоно уу.', true); return; }
-  submitForm('review-form', 'review-submit-btn', () => ({
-    type: 'review',
-    name:        document.getElementById('review-name').value,
-    rating:      selectedRating,
-    review_text: document.getElementById('review-text').value,
-    status: 'approved', email: '', phone: '', message: '', service: '', date: '',
-    nationality: '', purpose: '',
-    submitted_at: new Date().toLocaleString('mn-MN'),
-    created_at:   new Date().toISOString()
-  }), 'Үнэлгээ тавьсанд баярлалаа! ⭐', true);
-});
+document.querySelectorAll('.star-btn').forEach(b=>b.addEventListener('click',()=>{selectedRating=parseInt(b.dataset.star);updateStarUI();}));
+function updateStarUI(){document.querySelectorAll('.star-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.star)<=selectedRating));}
 
-document.querySelectorAll('.star-btn').forEach(b => b.addEventListener('click', () => {
-  selectedRating = parseInt(b.dataset.star); updateStarUI();
-}));
-function updateStarUI() {
-  document.querySelectorAll('.star-btn').forEach(b => {
-    b.classList.toggle('active', parseInt(b.dataset.star) <= selectedRating);
-  });
+// ── NAV ──────────────────────────────────────────────────
+function toggleMobileMenu(){const m=document.getElementById('mobile-menu');m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none';}
+function closeMobileMenu(){document.getElementById('mobile-menu').style.display='none';}
+function handleScroll(){
+  const nav=document.getElementById('main-nav');
+  if(window.scrollY>40)nav.classList.add('scrolled');else nav.classList.remove('scrolled');
+  document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight*0.88)el.classList.add('visible');});
+}
+function checkMobile(){
+  const btn=document.getElementById('menu-btn');const links=document.querySelector('.nav-links');
+  if(window.innerWidth<=900){btn.style.display='block';if(links)links.style.display='none';}
+  else{btn.style.display='none';document.getElementById('mobile-menu').style.display='none';if(links)links.style.display='flex';}
 }
 
-// ======================================================
-// NAV / SCROLL / MOBILE
-// ======================================================
-function toggleMobileMenu() {
-  const m = document.getElementById('mobile-menu');
-  m.style.display = (m.style.display === 'none' || !m.style.display) ? 'block' : 'none';
-}
-function closeMobileMenu() { document.getElementById('mobile-menu').style.display = 'none'; }
-
-function handleScroll() {
-  const nav = document.getElementById('main-nav');
-  if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
-  });
-}
-
-function checkMobile() {
-  const btn   = document.getElementById('menu-btn');
-  const links = document.querySelector('.nav-links');
-  if (window.innerWidth <= 900) {
-    btn.style.display = 'block';
-    if (links) links.style.display = 'none';
-  } else {
-    btn.style.display = 'none';
-    document.getElementById('mobile-menu').style.display = 'none';
-    if (links) links.style.display = 'flex';
-  }
-}
-
-// ======================================================
-// INIT
-// ======================================================
+// ── INIT ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
-  handleScroll();
-  checkMobile();
-  loadAllData();
+  handleScroll(); checkMobile(); loadAllData();
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('resize', checkMobile);
   document.addEventListener('keydown', e => {
-    if (document.getElementById('login-modal').style.display !== 'none') {
-      if (/^[0-9]$/.test(e.key)) pinPress(e.key);
-      if (e.key === 'Backspace')  pinBackspace();
-      if (e.key === 'Escape')     closeLoginModal();
+    if(document.getElementById('login-modal').style.display!=='none'){
+      if(/^[0-9]$/.test(e.key))pinPress(e.key);
+      if(e.key==='Backspace')pinBackspace();
+      if(e.key==='Escape')closeLoginModal();
     }
   });
 });
